@@ -1,0 +1,59 @@
+                                                                                Sorting Elements of an Array by Frequency
+
+
+
+So the basic idea is to use the maxHeap by sorting it by frequency count.
+Step 1:find all the freq of the elements in the array with the help of hashmap
+Step 2: Intialize the maxheap (PriorityQueue) and use custom implementation of sorting by its max freq of elements, or is any elements have same freq then sort by smallest element.
+Step 3: Traverse through the map and create a array of key value pairs and update it maxHeap(PriorityQueue)
+Step 4: Intialize the list and pop elements for the top of maxheap(PriorityQueue) and put until is freq of that particular element is exhausted and carry on till you emtpy the maxheap(PriorityQueue)
+Step 5: return the list
+
+
+Complexity ----> BigOcalc
+The time complexity of this sortByFreq method is O(n log n), where n is the number of elements in the input array arr. 
+This is because we are iterating through the input array once to build the frequency map in the HashMap, which takes O(n) time. 
+Then, we are adding all the elements from the HashMap to a PriorityQueue, which takes O(n log n) time due to the sorting operation based on frequency. 
+Finally, we are constructing the sorted array by repeatedly adding elements from the PriorityQueue, which also takes O(n) time.
+
+The space complexity is O(n) because we are using a HashMap to store the frequency of each element in the input array,
+and a PriorityQueue to store the elements sorted by frequency.
+Both of these data structures can potentially store all n elements from the input array.
+
+class Solution {
+    // Function to sort the array according to frequency of elements.
+    public ArrayList<Integer> sortByFreq(int arr[]) {
+        // add your code here
+        HashMap<Integer,Integer> hm = new HashMap<>();       
+        for(int i: arr){
+            if(hm.containsKey(i)){
+                hm.put(i,hm.get(i)+1);
+            }
+            else{
+                hm.put(i,1);
+            }
+        }
+        //System.out.println(hm);
+        PriorityQueue<int[]> pq = new PriorityQueue<>((x,y)->{
+            if(x[1]==y[1]){
+                return x[0]-y[0];
+            }
+            return y[1]-x[1];
+        });
+        ArrayList<Integer> result = new ArrayList<>();
+        for(int l : hm.keySet()){
+            int[] a = {l,hm.get(l)};
+           // System.out.println(l+" "+a[1]);
+            pq.offer(a);
+        }
+        //System.out.print(pq);
+        while(!pq.isEmpty()){
+            int[] a = pq.poll();
+           // System.out.println(a[0]+" "+a[1]);
+            for(int i=0;i<a[1];i++){
+                result.add(a[0]);
+            }
+        }       
+        return result;
+    }
+}
