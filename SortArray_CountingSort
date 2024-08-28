@@ -1,0 +1,47 @@
+reference link : https://leetcode.com/problems/sort-an-array/solutions/5532277/beats-100-java-counting-sort
+
+                                Sort Array -----> Counting Sort
+
+leetcode : 912
+
+class Solution {
+    public int[] sortArray(int[] nums) {
+        int[] result = new int[nums.length];
+
+        int max = 0;
+        int min = 999999999;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>max){
+                max = nums[i];
+            }
+            if(min>nums[i]){
+                min = nums[i];
+            }
+        }
+        int n = max - min;
+        int[] prefixSum = new int[n+1];
+        for(int i=0;i<nums.length;i++){
+            prefixSum[nums[i] - min]++;
+        }
+       
+        int presum = 0;
+        // for(int i=1;i<prefixSum.length;i++){
+        //     prefixSum[i] = prefixSum[i-1] + prefixSum[i];
+        // }
+        // for(int i=nums.length-1;i>=0;i--){
+        //     int ind = prefixSum[nums[i]] + n;
+        //     result[ind-1] = nums[i];
+        //     prefixSum[nums[i]]--; 
+        // }
+        // return result;
+        int idx = 0;
+        for (int i = 0; i <= n; i++) {
+            while (prefixSum[i] > 0) {
+                result[idx] = i + min;
+                idx++;
+                prefixSum[i]--;
+            }
+        }
+        return result;
+    }
+}
