@@ -1,0 +1,28 @@
+leetcode 1004.  https://leetcode.com/problems/max-consecutive-ones-iii/description/?envType=study-plan-v2&envId=leetcode-75
+
+BruteForce
+                                                        Max Consecutive Ones III 
+
+
+//Assume k length as max zeros 
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int maxLen = 0;
+        for(int i=0;i<nums.length;i++){
+            int zeros = 0;
+            for(int j = i;j<nums.length;j++){
+                if(nums[j]==0){
+                    zeros++;
+                }
+                if(zeros<=k){
+                    int len = j-i+1;
+                    maxLen = Math.max(maxLen,len);
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return maxLen;
+    }
+}
