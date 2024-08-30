@@ -1,0 +1,31 @@
+1004. Max Consecutive Ones III
+
+Dynamic sliding window and Two pointer 
+
+                                                                                    Max Consecutive Ones III
+
+
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int maxLen = 0;
+        int left = 0, right = 0,zeros = 0;
+        while(right<nums.length){
+            if(nums[right]==0){
+                zeros++;
+            }
+            if(zeros<=k){
+                int len = right-left+1;
+                maxLen = Math.max(maxLen,len);
+                
+            }
+            else{
+                if(nums[left]==0){
+                    zeros--;
+                }
+                left++;
+            }
+            right++;
+        }
+        return maxLen;
+    }
+}
