@@ -1,0 +1,31 @@
+Sorted subsequence of size 3 ---->GFG
+
+
+                                                                                            Sorted subsequence of size 3
+
+
+public List<Integer> find3Numbers(int[] arr) {
+            ArrayList<Integer> al = new ArrayList<>();
+            
+            int[] left_min = new int[arr.length];
+            int[] right_max = new int[arr.length];
+            
+            left_min[0] = arr[0];
+            for(int i=1;i<arr.length;i++){
+                left_min[i] = Math.min(left_min[i-1],arr[i]);
+            }
+            right_max[arr.length-1] = arr[arr.length-1];
+            for(int i=arr.length-2;i>=0;i--){
+                right_max[i] = Math.max(arr[i],right_max[i+1]);
+            }
+            
+            for(int i=1;i<arr.length-1;i++){
+                if(left_min[i-1]<arr[i] && arr[i]<right_max[i+1]){
+                    al.add(left_min[i-1]);
+                    al.add(arr[i]);
+                    al.add(right_max[i+1]);
+                    break;
+                }
+            }
+            return al;
+    }
