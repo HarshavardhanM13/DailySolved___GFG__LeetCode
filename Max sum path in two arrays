@@ -1,0 +1,40 @@
+Max sum path in two arrays -------> GFG --> 1/9/24 
+
+                                                                  Max sum path in two arrays
+class Solution {
+    public int maxPathSum(List<Integer> arr1, List<Integer> arr2) {
+        // code here
+        int pointer1 = 0;
+        int pointer2 = 0;
+        int sum1 = 0;
+        int sum2 = 0;
+        int maxSum = 0;
+        while(pointer1<arr1.size() && pointer2<arr2.size()){
+            if(arr1.get(pointer1)<arr2.get(pointer2)){
+                sum1 += arr1.get(pointer1);
+                pointer1++;
+            }
+            else if(arr1.get(pointer1)>arr2.get(pointer2)){
+                sum2 += arr2.get(pointer2);
+                pointer2++;
+            }
+            else{
+                maxSum += (Math.max(sum1,sum2)+arr1.get(pointer1));
+                sum1 = 0;
+                sum2 = 0;
+                pointer1++;
+                pointer2++;
+            }
+        }
+        while(pointer1<arr1.size()){
+            sum1+=arr1.get(pointer1);
+            pointer1++;
+        }
+        while(pointer2<arr2.size()){
+            sum2+=arr2.get(pointer2);
+            pointer2++;
+        }
+        maxSum+=Math.max(sum1,sum2);
+        return maxSum;
+    }
+}
