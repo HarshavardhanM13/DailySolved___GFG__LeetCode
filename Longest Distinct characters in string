@@ -1,0 +1,28 @@
+Longest Distinct characters in string ---- > GFG --> 2/09/2024
+
+
+                                                                                Longest Distinct characters in string
+
+
+class Solution{
+    static int longestSubstrDistinctChars(String s){
+        HashSet<Character> hs = new HashSet<>();
+        int left = 0;
+        int right = 0;
+        int maxLen = 0;
+        while(right<s.length()){
+            if(!hs.contains(s.charAt(right))){
+                hs.add(s.charAt(right));
+            }
+            else{
+                maxLen = Math.max(maxLen,hs.size());
+                hs.remove(s.charAt(left));
+                left++;
+                continue;
+            }
+            right++;
+        }
+        maxLen = Math.max(maxLen,hs.size());
+        return maxLen;
+    }
+}
