@@ -1,0 +1,26 @@
+ Find the Student that Will Replace the Chalk ----> Leetcode --> 1894
+
+
+                                                                                 Find the Student that Will Replace the Chalk
+
+
+class Solution {
+    public int chalkReplacer(int[] chalk, int k) {
+        
+        int index = 0;
+        while(index<chalk.length){
+             //System.out.println(k+" "+index+" "+chalk[index]
+         //   +" "+ (k-chalk[index]));
+            if((k-chalk[index])<0){
+                return index;
+            }
+            k-=chalk[index];
+           
+            index++;
+            if(index==chalk.length){
+                index = 0;
+            }
+        }
+        return 0;
+    }
+}
