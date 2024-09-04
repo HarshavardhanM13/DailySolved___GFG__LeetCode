@@ -1,0 +1,29 @@
+Count ways to N'th Stair(Order does not matter) ---> GFG
+
+
+                                                                        Count ways to N'th Stair(Order does not matter)
+
+
+class Solution {
+    public int nthStair(int n) {
+        return rec(1,n);
+    }
+    int rec(int level,int n){
+    if(level>n){
+        return 0;
+    }
+    if(level==n){
+        return 1;
+    }
+
+    int ans = 1;
+    int res = rec(level+2,n);
+    if(res>0){
+        ans+=res;
+    }
+    else{
+        ans+=rec(level+1,n);
+    }
+    return ans;
+}
+}
