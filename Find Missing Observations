@@ -1,0 +1,51 @@
+https://leetcode.com/problems/find-missing-observations/solutions/5738868/feasible-java-solution-for-beginners/
+
+2028. Find Missing Observations
+
+                                                                                        Find Missing Observations
+
+
+class Solution {
+    public int[] missingRolls(int[] rolls, int mean, int n) {
+        //calculate the total rolls (i.e) resultant total rolls
+        int total_rolls = rolls.length + n;
+        //calculate the total sum of resultant rolls
+        int total_sum = total_rolls *  mean;
+
+        //calculate the known sum of rolls
+        int known_sum = 0;
+
+        for(int i: rolls){
+            known_sum+=i;
+        }
+
+        //calculate the required sum of rolls
+        int req_sum = total_sum - known_sum;
+        //check for feasible req_sum (i.e) the req sum is within limit or not 
+        int min_sum = n*1;
+        int max_sum = n*6;
+
+        if(req_sum<min_sum || req_sum>max_sum){
+            return new int[0];
+        }
+        //use array of length of missing values length 
+        //it is by default needs all values to be 1
+        int[] missing = new int[n];
+        Arrays.fill(missing,1);
+        //calculate the remaining sum because we set all values to be 1
+        int remaining_sum = req_sum - n;
+        //calculate the remaining sum 
+        for(int i=0;i<n;i++){
+            //if remaining_sum is 0, we found the sum;
+            if(remaining_sum == 0){
+                break;
+            }
+            //for every step i need to calculate the min num of steps that missing[i] can add upto
+            int increment = Math.min(remaining_sum,6-missing[i]);
+            missing[i] += increment;
+            //decrement the remaining sum 
+            remaining_sum-=increment;
+        }
+        return missing;
+    }
+}
