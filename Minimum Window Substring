@@ -1,0 +1,48 @@
+76. Minimum Window Substring -----> Leetcode
+
+
+                                                                                 Minimum Window Substring
+
+
+
+
+
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+
+
+            d = {}
+            for elem in t:
+                if elem not in d:
+                    d[elem] = 1
+                else:
+                    d[elem] += 1
+            
+            min_len = 9999999999999
+            startIndex = -1
+            left = 0
+            right = 0
+            cnt = 0
+            n = len(s)
+
+            while right < n:
+                if s[right] in d:
+                    d[s[right]] -= 1
+                    if d[s[right]] >= 0:  
+                        cnt = cnt + 1 
+                while(cnt == len(t)):
+                    curr_len = right - left + 1
+                    if curr_len < min_len:
+                        min_len = curr_len
+                        startIndex = left
+
+                    if s[left] in d:
+                        d[s[left]] += 1
+                        if d[s[left]] > 0:
+                            cnt = cnt - 1
+                    left += 1
+                right += 1
+            if startIndex == -1:
+                return ""
+            else:
+                return s[startIndex:startIndex+min_len]
