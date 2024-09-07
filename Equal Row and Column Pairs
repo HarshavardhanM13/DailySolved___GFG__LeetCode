@@ -1,0 +1,39 @@
+2352. Equal Row and Column Pairs
+
+                                                      Equal Row and Column Pairs
+
+class Solution {
+    public int equalPairs(int[][] grid) {
+        HashMap<String,Integer> hm = new HashMap<>();
+
+        String cal = "";
+        for(int i=0;i<grid.length;i++){
+            cal = "";
+            for(int j=0;j<grid[0].length;j++){
+                cal += grid[i][j];
+                cal += ",";
+            }
+            //System.out.println(cal);
+            if(hm.containsKey(cal)){
+                hm.put(cal,hm.get(cal)+1);
+            }
+            else{
+                hm.put(cal,1);
+            }
+        }
+       // System.out.println(hm);
+        int pairs = 0;
+        for(int i=0;i<grid[0].length;i++){
+            cal = "";
+            for(int j=0;j<grid.length;j++){
+                cal += grid[j][i];
+                cal += ",";
+            }
+            if(hm.containsKey(cal)){
+               // System.out.println(pairs+" "+cal);
+                pairs += hm.get(cal);
+            }
+        }
+        return pairs;
+    }
+}
