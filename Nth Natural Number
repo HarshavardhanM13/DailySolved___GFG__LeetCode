@@ -1,0 +1,18 @@
+Nth Natural Number  _----> GFG
+
+                                                          Nth Natural Number
+
+
+class Solution {
+    long findNth(long n) {
+        // code here
+        long result = 0;
+        long base = 1;
+        while(n>0){
+            result += (n%9) * base;
+            n = n / 9;
+            base = base * 10;
+        }
+        return result;
+    }
+}
