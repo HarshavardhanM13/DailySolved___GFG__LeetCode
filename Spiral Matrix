@@ -1,0 +1,40 @@
+Spiral Matrix  ------------>Leetcode
+
+
+                                                                                          Spiral Matrix
+
+
+
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> al = new ArrayList<>();
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int l = 0;
+        int r = m-1;
+        int t = 0;
+        int b = n-1;
+       // int elem_count = 0;
+        while(al.size() < n*m){
+            for(int i = l;i<=r && al.size() < n*m;i++){
+                al.add(matrix[t][i]);
+            }
+            t++;
+            for(int i = t; i<=b && al.size() < n*m; i++){
+                al.add(matrix[i][r]);
+            }
+            r--;
+            for(int i = r;i>=l && al.size() < n*m;i--){
+                al.add(matrix[b][i]);
+            }
+            b--;
+            for(int i=b;i>=t && al.size() < n*m;i--){
+                al.add(matrix[i][l]);
+            }
+            l++;
+        }
+        return al;
+
+    }
+}
