@@ -1,0 +1,35 @@
+Spiral Matrix II ---------------> Leetcode 
+
+
+                                                                                  Spiral Matrix
+
+  class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] result =  new int[n][n];
+        int t = 0;
+        int l = 0;
+        int r = n-1;
+        int b = n-1;
+        int num = 1;
+
+        while(num <= n*n){
+            for(int i=l;i<=r && num<= n*n;i++){
+                result[t][i] = num++; 
+            }
+            t++;
+            for(int i=t;i<=b && num<= n*n;i++){
+                result[i][r] = num++; 
+            }
+            r--;
+            for(int i=r;i>=l && num<= n*n;i--){
+                result[b][i] = num++; 
+            }
+            b--;
+            for(int i=b;i>=t && num<= n*n;i--){
+                result[i][l] = num++; 
+            }
+            l++;
+        }
+        return result;
+    }
+}
