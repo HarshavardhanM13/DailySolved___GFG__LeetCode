@@ -1,0 +1,27 @@
+Minimum Jumps --------> GFG
+
+                                                                                          Minimum Jumps
+
+
+class Solution:
+	def minJumps(self, arr):
+	    #code here
+        minJump = 0
+        left = 0
+        right = 0
+        N = len(arr)
+        
+        if arr[0] == 0:
+            return -1
+            
+        while right < N-1:
+            far = 0
+            for i in range(left,right+1):
+                far = max(far,i + arr[i])
+            if far <= right:
+                return -1;
+            left = right + 1
+            right = far
+            minJump += 1
+        
+        return minJump
