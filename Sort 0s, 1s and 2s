@@ -1,0 +1,27 @@
+Sort 0s, 1s and 2s --------------> GFG
+
+
+                                                                            Sort 0s, 1s and 2s
+
+
+
+class Solution {
+    // Function to sort an array of 0s, 1s, and 2s
+    public void sort012(ArrayList<Integer> arr) {
+        int i=0,j=0,k=arr.size()-1;
+        while(i<=k){
+            if(arr.get(i)==0){
+                Collections.swap(arr,i,j);
+                j++;
+                i++;
+            }
+            else if(arr.get(i)==1){
+                i++;
+            }
+            else{
+                Collections.swap(arr,i,k);
+                k--;
+            }
+        }
+    }
+}
