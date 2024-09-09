@@ -1,0 +1,12 @@
+Unique Binary Search Trees -------->LeetCode
+
+                                                                            Unique Binary Search Trees
+
+class Solution:
+    def numTrees(self, n: int) -> int:
+        two_n_fact = math.factorial(2 * n)
+        n_plus_one_fact = math.factorial(n + 1)
+        n_fact = math.factorial(n)
+        catalan_result = two_n_fact // (n_plus_one_fact * n_fact)
+        return catalan_result
+        
