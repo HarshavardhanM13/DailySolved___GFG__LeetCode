@@ -1,0 +1,44 @@
+Swapping Nodes in a Linked List------>LeetCode
+
+                                                                                  Swapping Nodes in a Linked List
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapNodes(ListNode head, int k) {
+        int ind = 1;
+        int N = 0;
+        ListNode temp = head;
+        ListNode first_k = null;
+        while(temp!= null){
+            if(ind == k){
+                first_k = temp;
+            }
+            N++;
+            ind++;
+            temp = temp.next;
+        }
+        int to_go = N - k;
+        ind = 0;
+        temp = head;
+        while(temp != null){
+            if(ind == to_go){
+                int temp_var = first_k.val;
+                first_k.val = temp.val;
+                temp.val = temp_var;
+            }
+            ind++;
+            temp = temp.next;
+        }
+        return head;
+    }
+}
