@@ -1,0 +1,75 @@
+2326. Spiral Matrix IV -----> LeetCode
+
+
+                                                                                         Spiral Matrix IV
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int[][] spiralMatrix(int m, int n, ListNode head) {
+            int result[][] = new int[m][n];
+            int top = 0;
+            int left = 0;
+            int right = n-1;
+            int bottom = m-1;
+            int empty_val = -1;
+            int tot_elem = 0;
+            while(tot_elem < n * m){
+                for(int i=left;i<=right && tot_elem<n*m;i++){
+                    if(head!=null){
+                        result[top][i] = head.val;
+                        head = head.next;
+                    }
+                    else{
+                        result[top][i] = empty_val;
+                    }
+                    tot_elem += 1;
+                }
+                top++;
+                for(int i=top;i<=bottom && tot_elem<n*m;i++){
+                    if(head!=null){
+                        result[i][right] = head.val;
+                        head = head.next;
+                    }
+                    else{
+                        result[i][right] = empty_val;
+                    }
+                    tot_elem += 1;
+                }
+                right--;
+                for(int i=right;i>=left && tot_elem<n*m;i--){
+                    if(head!=null){
+                        result[bottom][i] = head.val;
+                        head = head.next;
+                    }
+                    else{
+                        result[bottom][i] = empty_val;
+                    }
+                    tot_elem += 1;
+                }
+                bottom--;
+                for(int i=bottom;i>=top && tot_elem<n*m;i--){
+                    if(head!=null){
+                        result[i][left] = head.val;
+                        head = head.next;
+                    }
+                    else{
+                        result[i][left] = empty_val;
+                    }
+                    tot_elem += 1;
+                }
+                left++;  
+            }
+            return result;
+    }
+}
