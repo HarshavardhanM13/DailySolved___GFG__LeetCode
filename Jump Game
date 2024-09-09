@@ -1,0 +1,18 @@
+Jump Game ------>LeetCode
+
+                                                                          Jump Game
+
+class Solution {
+    public boolean canJump(int[] nums) {
+        int max_ind = 0;
+        for(int i=0;i<nums.length;i++){
+            if(max_ind < i){
+                return false;
+            }
+            if(max_ind < i + nums[i]){
+                max_ind = i + nums[i];
+            }
+        }
+        return true;
+    }
+}
