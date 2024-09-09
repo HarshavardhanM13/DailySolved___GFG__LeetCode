@@ -1,0 +1,29 @@
+Search a 2D Matrix II----------->LeetCode
+
+                                                                                        Search a 2D Matrix II
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        for(int i=0;i<matrix.length;i++){
+            boolean ret = search(0,matrix[0].length-1,matrix[i],target);
+            if(ret){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean search(int left,int right,int[] matrix,int target){
+        while(left <= right){
+            int mid = (left + right)/2;
+            if(matrix[mid] == target){
+                return true;
+            }
+            else if(matrix[mid]<target){
+                left = mid + 1;
+            }
+            else{
+                right = mid - 1;
+            }
+        }
+        return false;
+    }
+}
