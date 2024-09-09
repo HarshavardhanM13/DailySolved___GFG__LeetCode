@@ -1,0 +1,21 @@
+Jump Game II ---->LeetCode
+
+                                                                    Jump Game II
+class Solution {
+    public int jump(int[] nums) {
+        int minJump = 0;
+        int left = 0;
+        int right = 0;
+        int N = nums.length -1;
+        while(right < N){
+            int far = 0;
+            for(int i=left;i<=right;i++){
+                far = Math.max(far,i+nums[i]);
+            }
+            left = right + 1;
+            right = far;
+            minJump += 1;
+        }
+        return minJump;
+    }
+}
