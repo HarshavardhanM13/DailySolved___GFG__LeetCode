@@ -1,0 +1,28 @@
+491. Non-decreasing Subsequences
+
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();
+    
+    public List<List<Integer>> findSubsequences(int[] nums) {
+       // List<Integer> al = new ArrayList<>();
+        backtrack(0,nums,new ArrayList<>());
+        return result;
+    }
+    void backtrack(int currIndex,int[] arr,List<Integer> currValues){
+        if(currValues.size()>1){
+            result.add(new ArrayList<>(currValues));
+        }
+        Set<Integer> set = new HashSet<>();
+        for(int i=currIndex;i<arr.length;i++){
+            if(set.contains(arr[i])){
+                continue;
+            }
+            if(currValues.isEmpty() || arr[i]>=currValues.get(currValues.size()-1)){   
+                set.add(arr[i]);
+                currValues.add(arr[i]);
+                backtrack(i+1,arr,currValues);
+                currValues.remove(currValues.size()-1);
+            }
+        }
+    }
+}
