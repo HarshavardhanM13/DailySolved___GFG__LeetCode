@@ -8,10 +8,12 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Hash Table
 |  |
 | ------- |
+| [1777-determine-if-two-strings-are-close](https://github.com/HarshavardhanM13/DailySolved___GFG__LeetCode/tree/master/1777-determine-if-two-strings-are-close) |
 | [1786-count-the-number-of-consistent-strings](https://github.com/HarshavardhanM13/DailySolved___GFG__LeetCode/tree/master/1786-count-the-number-of-consistent-strings) |
 ## String
 |  |
 | ------- |
+| [1777-determine-if-two-strings-are-close](https://github.com/HarshavardhanM13/DailySolved___GFG__LeetCode/tree/master/1777-determine-if-two-strings-are-close) |
 | [1786-count-the-number-of-consistent-strings](https://github.com/HarshavardhanM13/DailySolved___GFG__LeetCode/tree/master/1786-count-the-number-of-consistent-strings) |
 ## Bit Manipulation
 |  |
@@ -20,5 +22,10 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Counting
 |  |
 | ------- |
+| [1777-determine-if-two-strings-are-close](https://github.com/HarshavardhanM13/DailySolved___GFG__LeetCode/tree/master/1777-determine-if-two-strings-are-close) |
 | [1786-count-the-number-of-consistent-strings](https://github.com/HarshavardhanM13/DailySolved___GFG__LeetCode/tree/master/1786-count-the-number-of-consistent-strings) |
+## Sorting
+|  |
+| ------- |
+| [1777-determine-if-two-strings-are-close](https://github.com/HarshavardhanM13/DailySolved___GFG__LeetCode/tree/master/1777-determine-if-two-strings-are-close) |
 <!---LeetCode Topics End-->
