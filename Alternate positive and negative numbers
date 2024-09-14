@@ -1,0 +1,43 @@
+Alternate positive and negative numbers --->GFG
+
+
+
+class Solution {
+    void rearrange(ArrayList<Integer> arr) {
+        
+        ArrayList<Integer> al1 = new ArrayList<>(); // For positive numbers
+        ArrayList<Integer> al2 = new ArrayList<>(); // For negative numbers
+        
+        // Separate the positive and negative numbers
+        for(int num : arr) {
+            if(num >= 0) {
+                al1.add(num);
+            } else {
+                al2.add(num);
+            }
+        }
+
+        int pos = 0;
+        int neg = 0;
+        int i = 0;
+
+        
+        while(pos < al1.size() && neg < al2.size()) {
+            if(i % 2 == 0) {
+                arr.set(i, al1.get(pos++));
+            } else {
+                arr.set(i, al2.get(neg++));
+            }
+            i++;
+        }
+
+        while(pos < al1.size()) {
+            arr.set(i++, al1.get(pos++));
+        }
+
+    
+        while(neg < al2.size()) {
+            arr.set(i++, al2.get(neg++));
+        }
+    }
+}
