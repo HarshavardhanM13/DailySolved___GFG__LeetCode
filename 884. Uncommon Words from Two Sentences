@@ -1,0 +1,29 @@
+884. Uncommon Words from Two Sentences
+
+class Solution:
+    def uncommonFromSentences(self, s1: str, s2: str) -> List[str]:
+        d1 = {}
+        for i in s1.split(' '):
+            if i not in d1:
+                d1[i] = 1
+            else:
+                d1[i] += 1
+        d2 = {}    
+        for i in s2.split(" "):
+            if i not in d2:
+                d2[i] = 1
+            else:
+                d2[i] += 1
+        
+        words1 = []
+        for i in d1:
+            if i not in d2:
+                if d1[i]==1:
+                    words1.append(i)
+        words2 = []
+        for i in d2:
+            if i not in d1:
+                if d2[i] == 1:
+                    words2.append(i)
+        return words1 + words2
+        
