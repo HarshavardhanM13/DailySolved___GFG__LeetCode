@@ -1,0 +1,13 @@
+Reverse Words
+
+
+def reverseWords(self,str):
+        # code here 
+        res = ''
+        words = str.split(".")
+       # print(words)
+        for ind in range(len(words)-1,0,-1):
+            res+=words[ind]
+            res+='.'
+        res+=words[0]
+        return res;
