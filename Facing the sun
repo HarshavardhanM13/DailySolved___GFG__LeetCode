@@ -1,0 +1,20 @@
+Facing the sun
+
+
+class Solution {
+    // Returns count buildings that can see sunlight
+    public int countBuildings(int[] height) {
+        
+        
+        int facing = height[0];
+        int switches = 1;
+        
+        for(int ind = 1;ind<height.length;ind++){
+            if(facing < height[ind]){
+                switches++;
+                facing = height[ind];
+            }
+        }
+        
+        return switches;
+    }
