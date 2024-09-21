@@ -1,0 +1,16 @@
+386. Lexicographical Numbers
+
+class Solution:
+    def lexicalOrder(self, n: int) -> List[int]:
+
+        start = 1
+        res = []
+        while start <= n:
+            s = str(start)
+            res.append(s)
+            start += 1
+        
+        res = sorted(res)
+        res = [int(num) for num in res]
+        return res
+        
