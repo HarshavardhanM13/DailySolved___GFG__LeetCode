@@ -1,0 +1,28 @@
+ Frog Jump --> CN
+
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+from typing import *
+
+  
+def frogJump(n: int, heights: List[int]) -> int:
+
+    arr = [-1] * (n+1)
+
+    def rec(ind):
+
+        if ind == 0:
+           return 0
+        if arr[ind] != -1:
+            return arr[ind]
+        left = rec(ind - 1) + abs(heights[ind] - heights[ind - 1])   
+        right = 99999999999
+        if ind > 1:    
+            right = rec(ind - 2) + abs(heights[ind] - heights[ind - 2])
+        arr[ind] = min(left,right)
+        return arr[ind]
+    return rec(n-1)
+
