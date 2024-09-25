@@ -1,0 +1,25 @@
+Palindrome Linked List
+
+class Solution {
+    // Function to check whether the list is palindrome.
+    boolean isPalindrome(Node head) {
+        ArrayList<Integer> al = new ArrayList<>();
+        
+        while(head!=null){
+            al.add(head.data);
+            head = head.next;
+        }
+        
+        int left = 0, right  = al.size()-1;
+        while(left<right){
+            if(!al.get(left).equals(al.get(right))){
+                
+              //  System.out.println(left+" "+right+" "+al);
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
