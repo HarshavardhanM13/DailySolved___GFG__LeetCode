@@ -1,0 +1,29 @@
+Roof Top
+
+
+
+
+class Solution {
+    // Function to find maximum number of consecutive steps
+    // to gain an increase in altitude with each step.
+    public int maxStep(int arr[]) {
+        int max = 0;
+        int curr_max = 0;
+        int n = arr.length;
+        for(int i=0;i<n-1;i++){
+            if(arr[i+1]>arr[i]){
+                curr_max++;
+            }
+            else{
+                if(curr_max>max){
+                    max = curr_max;
+                }
+                curr_max = 0;
+            }
+        }
+        if(curr_max>max){
+            max = curr_max;
+        }
+        return max;
+    }
+}
