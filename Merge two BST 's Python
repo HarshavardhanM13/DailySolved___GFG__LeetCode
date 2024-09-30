@@ -1,0 +1,26 @@
+
+Merge two BST 's Python
+
+
+#User function Template for python3
+class Solution:
+    def merge(self, root1, root2):
+        
+        res = []
+        
+        def inorder(root):
+            if not root:
+                return ;
+            inorder(root.left)
+            res.append(root.data)
+            inorder(root.right)
+            #res.append(root.data)
+        
+        inorder(root1)
+        inorder(root2)
+       # print(res)
+        res.sort()
+        return res
+            
+        
+        
