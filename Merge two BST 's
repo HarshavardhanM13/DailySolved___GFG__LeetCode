@@ -1,0 +1,18 @@
+Merge two BST 's
+
+class Solution:
+    def merge(self, root1, root2):
+        
+        res = []
+        
+        def inorder(root):
+            if not root:
+                return ;
+            inorder(root.left)
+            res.append(root.data)
+            inorder(root.right)
+        inorder(root1)
+        inorder(root2)
+        res.sort()
+        return res
+            
