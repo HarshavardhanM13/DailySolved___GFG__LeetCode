@@ -1,0 +1,23 @@
+Multiply two linked lists
+
+
+
+def multiply_two_lists(self, first, second):
+        num1 = 0
+        num2 = 0
+        
+        while first and second:
+            num1 = (num1 * 10 + first.data)%(10**9 + 7) ;
+            first = first.next
+            num2 = (num2 * 10 + second.data)%(10**9 + 7);
+            second = second.next
+        while first:
+            num1 = (num1 * 10 + first.data)%(10**9 + 7);
+            first = first.next
+        while second:
+            num2 = (num2 * 10 + second.data)%(10**9 + 7);
+            second = second.next
+        
+        res = (((num1)%(10**9 + 7)) * ((num2)%(10**9 + 7)))%(10**9 + 7)
+        
+        return res
