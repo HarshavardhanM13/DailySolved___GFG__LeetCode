@@ -1,0 +1,28 @@
+Check If Array Pairs Are Divisible by k
+
+class Solution:
+    def canArrange(self, arr: List[int], k: int) -> bool:
+
+        remMap = {}
+
+        for num in arr:
+            rem = num % k
+            if rem < 0:
+                rem += k
+
+            if rem not in remMap:
+                remMap[rem] = 1
+            else:
+                remMap[rem] += 1
+
+        for key, value in remMap.items():
+            if key == 0 and value % 2 == 1:
+                return False
+            elif key > 0:
+                comp = k - key
+                if comp not in remMap or remMap[comp] != remMap[key]:
+                    return False
+
+        return True
+
+         
