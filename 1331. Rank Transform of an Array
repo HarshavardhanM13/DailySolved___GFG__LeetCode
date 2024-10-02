@@ -1,0 +1,30 @@
+1331. Rank Transform of an Array
+
+class Solution {
+    public int[] arrayRankTransform(int[] arr) {
+        int temp[] = new int[arr.length];
+
+        for(int i = 0;i<arr.length;i++){
+            temp[i] = arr[i];
+        }
+        Arrays.sort(temp);
+        //System.out.println(temp);
+        int rank = 1;
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int i=0;i<arr.length;i++){
+            if(hm.containsKey(temp[i])){
+                hm.put(temp[i],hm.get(temp[i]));
+            }
+            else{
+                hm.put(temp[i],rank);
+                rank++;
+            }
+        }
+        for(int i = 0;i<arr.length;i++){
+            rank = hm.get(arr[i]);
+            temp[i] = rank;
+        }
+        return temp;
+
+    }
+}
