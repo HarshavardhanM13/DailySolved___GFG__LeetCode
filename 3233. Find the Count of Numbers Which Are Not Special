@@ -1,0 +1,30 @@
+3233. Find the Count of Numbers Which Are Not Special
+
+class Solution:
+    def nonSpecialCount(self, l: int, r: int) -> int:
+        
+        def seive(n):
+            primes = [1] * (n + 1)
+            primes[0] = 0
+            primes[1] = 0
+            for i in range(2,int((n + 1) ** 0.5) + 1):
+                if primes[i] == 1:
+                    j = i * i
+                    while j <= n:
+                        primes[j] = 0
+                        j += i
+            for i in range(1,n + 1):
+                primes[i] += primes[i - 1]
+           # print(primes)
+            return primes
+
+        def countOfNumbers(left,right):
+            l = int(math.sqrt(left))
+            r = int(math.sqrt(right))
+            if l * l != left:
+                l += 1
+            primes = seive(r)
+            prime_count = primes[r] - primes[l - 1]
+            return (right - left + 1) - prime_count
+        
+        return countOfNumbers(l,r)
