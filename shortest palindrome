@@ -1,0 +1,18 @@
+shortest palindrome
+
+Brute Force
+
+class Solution:
+    def shortestPalindrome(self, s: str) -> str:
+
+        length = len(s)
+        reversedString = s[::-1]
+
+        for i in range(len(s)):
+            if s[:length-i] == reversedString[i:]:
+                s = reversedString[:i] + s
+                return s
+        return ""
+        
+
+        
