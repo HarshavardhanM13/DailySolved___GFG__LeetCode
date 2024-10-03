@@ -1,0 +1,19 @@
+Majority Vote
+
+class Solution:
+    def findMajority(self, nums):
+        n= len(nums)
+        candidates = []
+        d = {}
+        for num in nums:
+            if num not in d:
+                d[num] = 1
+            else:
+                d[num] += 1
+        
+        for key in d.keys():
+            if d[key] > n/3:
+                candidates.append(key)
+        if not candidates:
+            return [-1]
+        return candidates
