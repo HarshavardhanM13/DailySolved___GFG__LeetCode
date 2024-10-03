@@ -1,0 +1,27 @@
+198. House Robber
+
+class Solution {
+
+    public int rob(int[] nums) {
+        int[] dp = new int [nums.length];
+        for(int i=0;i<nums.length;i++){
+            dp[i] = -1;
+        }
+        return rec(0,nums.length,nums,dp);
+    }
+    int rec(int ind,int n,int[] nums,int[] dp){
+        if(ind == n - 1){
+            return nums[ind];
+        }
+        if(ind >= n){
+            return 0;
+        }
+        if(dp[ind]!=-1){
+            return dp[ind];
+        }
+        int pick = nums[ind] + rec(ind + 2,n,nums,dp);
+        int not_pick = 0 + rec(ind + 1,n,nums,dp);
+        dp[ind] = Math.max(pick,not_pick);
+        return dp[ind];
+    }
+}
