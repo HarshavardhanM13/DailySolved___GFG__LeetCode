@@ -1,0 +1,17 @@
+ Maximum sum of non-adjacent elements
+
+def maximumNonAdjacentSum(nums):    
+    n = len(nums)
+    dp = [-1] * n
+    def backtrack(ind):
+        if ind == n-1:
+            return nums[ind]
+        if ind >= n:
+            return 0
+        if dp[ind] != -1:
+            return dp[ind]
+        picked = nums[ind] + backtrack(ind + 2)
+        not_picked = 0 + backtrack(ind + 1)
+        dp[ind] = max(picked,not_picked)
+        return dp[ind]
+    return backtrack(0) 
