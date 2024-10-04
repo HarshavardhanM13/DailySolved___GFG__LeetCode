@@ -1,0 +1,57 @@
+Deletion and Reverse in Circular Linked List
+
+
+
+class Solution {
+    // Function to reverse a circular linked list
+    
+Node reverse(Node head) {
+        Node prev = null;
+        Node curr = head;
+        while(curr != null){
+            Node temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev.next;
+    }
+
+
+Node deleteNode(Node head, int key) {
+    if (head == null) return null;
+
+    Node prev = null;
+    Node curr = head;
+    Node tail = head;
+
+    while (tail.next != head) {
+        tail = tail.next;
+    }
+
+    if (curr == tail && key == curr.data) {
+        return null;
+    }
+
+    curr = head;
+    int n = 1;
+
+    while (curr != tail) {
+        if (n == 1 && curr.data == key) {
+            tail.next = curr.next;
+            head = curr.next;
+            break;
+        } else if (curr.data == key) {
+            prev.next = curr.next;
+            break;
+        }
+        prev = curr;
+        curr = curr.next;
+        n += 1;
+    }
+    
+ 
+    return head;
+}
+
+}
