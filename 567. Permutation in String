@@ -1,0 +1,42 @@
+567. Permutation in String
+
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+
+        if len(s1) > len(s2):
+            return False
+        h1 = {}
+        h2 = {}
+        az = 'qwertyuioplkjhgfdsazxcvbnm'
+        for ch in az:
+            h1[ch] = h2[ch] = 0
+        for ch in s1:
+            h1[ch] += 1
+        for ch in range(len(s1)):
+            h2[s2[ch]] += 1
+        
+        matches = 0
+        for ch in az:
+            if h1[ch] == h2[ch]:
+                matches += 1
+        
+        start = len(s1) 
+        to_remove = 0
+        while start < len(s2):
+            if matches == 26:
+                return True
+
+            h2[s2[start]] += 1
+            if h1[s2[start]] == h2[s2[start]]:
+                matches += 1
+            elif h1[s2[start]] + 1 == h2[s2[start]]:
+                matches -= 1
+            
+            h2[s2[to_remove]] -= 1
+            if h1[s2[to_remove]] == h2[s2[to_remove]]:
+                matches += 1
+            elif h1[s2[to_remove]] - 1 == h2[s2[to_remove]]:
+                matches -= 1
+            to_remove += 1
+            start += 1
+        return matches == 26
