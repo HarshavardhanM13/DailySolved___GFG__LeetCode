@@ -1,0 +1,35 @@
+CN ----> Maximum Sum Circular Subarray
+
+
+def maxSubarraySum(arr, n):
+	# Write your code here.
+	
+	def max_subarray_sum():
+		curr_sum = arr[0]
+		max_till_now = arr[0]
+
+		for x in arr[1:]:
+			curr_sum = max(x,curr_sum + x)
+			max_till_now = max(curr_sum,max_till_now)
+		
+		return max_till_now
+
+	def min_subarray_sum():
+		curr_sum = arr[0]
+		min_till_now = arr[0]
+
+		for x in arr[1:]:
+			curr_sum = min(x,curr_sum + x)
+			min_till_now = min(curr_sum,min_till_now)
+
+		return min_till_now
+
+		
+	max_sum = max_subarray_sum()
+	min_sum = min_subarray_sum()
+	total = sum(arr)
+
+	if max_sum < 0:
+		return max_sum
+	
+	return max(max_sum,total - min_sum)
