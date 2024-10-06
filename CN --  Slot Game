@@ -1,0 +1,27 @@
+
+CN --  Slot Game
+
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def slotScore(original, guess):
+    
+    pseudo_points = 0
+    perfect_points = 0
+    original_d = {}
+    guess_d = {}
+
+    for i in range(len(guess)):
+        if guess[i] == original[i]:
+            perfect_points += 1
+        else:
+            original_d[original[i]] = original_d.get(original[i],0) + 1
+            guess_d[guess[i]] = guess_d.get(guess[i],0) + 1
+
+    for color in guess_d:
+        if color in original_d:
+            pseudo_points += min(original_d[color],guess_d[color])
+    
+    return pseudo_points + 2 * perfect_points
