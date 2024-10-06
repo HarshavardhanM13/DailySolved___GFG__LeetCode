@@ -1,0 +1,29 @@
+
+CN -- Distinct Subarrays with at most k odd elements II
+
+from typing import List
+
+def distinctSubKOdds(n: int, k: int, arr: List[int]) -> int:
+	
+
+    odd_counts = 0
+    left = 0
+    right = 0
+
+    distinct = set()
+
+    while right < n:
+        
+        if arr[right] % 2 == 1:
+            odd_counts += 1
+        while odd_counts > k:
+            if arr[left] % 2 == 1:
+                odd_counts -= 1
+            left += 1
+        for i in range(left,right + 1):
+            sub_array = tuple(arr[i : right + 1])
+            distinct.add(sub_array)
+        right += 1
+    #print(distinct)
+
+    return len(distinct)
