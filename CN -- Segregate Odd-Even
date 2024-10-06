@@ -1,0 +1,36 @@
+CN -- Segregate Odd-Even
+
+
+
+
+ # ---- Node class for reference-----
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def segregateOddEven(head):
+
+    if not head:
+      return head;
+
+    bride = Node(0)
+    groom = Node(0)
+
+    n1 = bride
+    n2 = groom
+
+    while head:
+      temp = head.next
+      if head.data % 2 == 1:
+        n1.next = head
+        head.next = None
+        n1 = n1.next
+      else:
+        n2.next = head
+        head.next = None
+        n2 = n2.next
+
+      head = temp
+    n1.next = groom.next
+    return bride.next
