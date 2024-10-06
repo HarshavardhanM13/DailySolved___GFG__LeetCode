@@ -1,0 +1,19 @@
+wk - 418 Q1. Maximum Possible Number by Binary Concatenation
+
+
+class Solution:
+    def maxGoodNumber(self, nums: List[int]) -> int:
+
+
+        nums = [bin(num)[2:] for num in nums]
+
+        def compare(x,y):
+            if x+y > y+x:
+                return -1
+            else:
+                return 1
+        nums = sorted(nums,key=cmp_to_key(compare))
+
+        binstr = ''.join(nums)
+       # binstr = binstr.lstrip('0')
+        return int(binstr,2)
