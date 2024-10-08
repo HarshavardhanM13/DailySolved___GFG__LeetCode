@@ -1,0 +1,18 @@
+1963. Minimum Number of Swaps to Make the String Balanced
+
+class Solution {
+    public int minSwaps(String s) {
+        int count = 0;
+        int minMax = 0;
+        for(char ch : s.toCharArray()){
+            if(ch == ']'){
+                count += 1;
+            }
+            else{
+                count -= 1;
+            }
+            minMax = Math.max(count,minMax);
+        }
+        return (minMax + 1) / 2;
+    }
+}
