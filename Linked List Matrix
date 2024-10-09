@@ -1,0 +1,50 @@
+Linked List Matrix
+
+
+class Solution {
+    static Node construct(int arr[][]) {
+        // Add your code here.
+        Node head = null;
+        Node ptr = null;
+        int n = arr.length;
+        int m = arr[0].length;
+        
+        for(int i = 0; i < m; i++){
+            Node newNode = new Node(arr[0][i]);
+            if(head == null){
+                head = newNode;
+                ptr = newNode;
+            }
+            else{
+                ptr.right = newNode;
+                ptr=ptr.right;
+            }
+        }
+        
+        Node newHead = head;
+        ptr = newHead;
+        
+        for(int i =1; i<n; i++){
+            Node head2 = null;
+            Node ptr2 = null;
+            for(int j = 0; j <m; j++){
+                Node temp = new Node(arr[i][j]);
+                if(head2 == null){
+                    head2 = temp;
+                    ptr2 = temp;
+                }
+                else{
+                    ptr2.right  = temp;
+                    ptr2=ptr2.right;
+                }
+                ptr.down = temp;
+                ptr=ptr.right;
+                
+            }
+            newHead = head2;
+            ptr = newHead;
+        }
+        
+        return head;
+    }
+}
