@@ -1,0 +1,47 @@
+962. Maximum Width Ramp
+
+
+
+
+class Solution:
+    def maxWidthRamp(self, nums: List[int]) -> int:
+        
+
+
+        stack = []
+
+        for i in range(len(nums)):
+            if not stack or nums[i] < nums[stack[-1]]:
+                stack.append(i)
+        max_ramp = 0
+        for j in range(len(nums) - 1, -1,-1):
+            while stack and nums[j] >= nums[stack[-1]]:
+                max_ramp = max(max_ramp,j - stack.pop())
+        return max_ramp
+
+        #                                               TLE
+        # stack = []
+        # last_elem = nums[-1]
+        # ind = len(nums) - 1
+        # def check(n): 
+        #     flag = False
+        #     for ind in range(n + 1):
+        #         if ind < n and nums[ind] <= last_elem:
+        #             stack.append(ind)
+        #             flag = True
+        #     if flag:
+        #         return n - stack[0]
+        #     else:
+        #         return 0 
+        # ret = 0
+        # MAX = -1
+        # while ind >= 0:
+        #     ret = check(ind)
+        #     if ret > 0:
+        #         MAX = max(ret , MAX)
+        #     ind -= 1
+        #     stack = []
+        #     last_elem = nums[ind]
+        # return MAX if MAX != -1 else 0
+
+        
