@@ -1,0 +1,24 @@
+1942. The Number of the Smallest Unoccupied Chair
+
+
+import heapq
+from typing import List
+
+class Solution:
+    def smallestChair(self, times: List[List[int]], targetFriend: int) -> int:
+        events = []
+        for i, (arr, leave) in enumerate(times):
+            events.append((arr, "arrive", i))
+            events.append((leave, "leave", i))
+        events.sort(key=lambda x: (x[0], x[1] == "arrive"))
+        available_chairs = list(range(len(times)))  
+        heapq.heapify(available_chairs)
+        occupied_chairs = {} 
+        for time, event_type, friend in events:
+            if event_type == "leave":
+                heapq.heappush(available_chairs, occupied_chairs[friend])
+            else: 
+                assigned_chair = heapq.heappop(available_chairs)
+                occupied_chairs[friend] = assigned_chair
+                if friend == targetFriend:
+                    return assigned_chair
