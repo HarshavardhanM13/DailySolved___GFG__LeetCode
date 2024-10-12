@@ -1,0 +1,13 @@
+Two Smallests in Every Subarray
+
+
+class Solution:
+    def pairWithMaxSum(self,arr):
+        n = len(arr)
+        if n < 2:
+            return -1  
+        max1 = -1 
+        for num in range(len(arr)-1):
+            sum1 = arr[num]+ arr[num+1]
+            max1 = max(max1, sum1)
+        return max1
