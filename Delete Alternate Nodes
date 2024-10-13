@@ -1,0 +1,15 @@
+Delete Alternate Nodes
+
+
+
+
+class Solution:
+    def deleteAlt(self, head):
+        
+        curr = head 
+        while curr.next and curr.next.next:
+            temp = curr.next.next
+            curr.next = temp
+            curr = temp
+        curr.next = None
+        return head
