@@ -1,0 +1,36 @@
+Count Negative Numbers
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int n,m;
+		n = sc.nextInt();
+		m = sc.nextInt();
+		
+		int[][] arr = new int[n][m];
+		
+		for(int i=0;i<n;i++){
+		    for(int j=0;j<m;j++){
+		        arr[i][j] = sc.nextInt();
+		    }
+		}
+        int count =0;
+        
+        for(int i=0;i<n;i++){
+            int curr = m-1;
+            while(curr>-1 && arr[i][curr] < 0){
+                count++;
+                curr--;
+            }
+        }
+        System.out.println(count);
+	}
+}
