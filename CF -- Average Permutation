@@ -1,0 +1,29 @@
+CF -- Average Permutation
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int test;
+    cin>>test;
+    while(test){
+int n;
+    cin >> n;
+    vector<int> v(n);
+    int s(0), e(n - 1);
+    int cnt = n;
+    while (s < e)
+    {
+        v[s++] = cnt--;
+        v[e--] = cnt--;
+    }
+    if (n % 2 == 1)
+        v[s] = cnt;
+    for (int x : v)
+        cout << x << " ";
+    cout << endl;
+    test--;
+}
+}
