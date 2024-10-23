@@ -1,0 +1,20 @@
+Find the Sum of Last N nodes of the Linked List
+
+
+class Solution:
+    def sumOfLastN_Nodes(self, head, n):
+        #function should return sum of last n nodes
+        count = 0
+        curr = head
+        while curr:
+            count += 1
+            curr = curr.next
+            
+        curr = head
+        sum = 0
+        while curr:
+            if count-n<1:
+                sum += curr.data
+            count -= 1
+            curr = curr.next;
+        return sum
