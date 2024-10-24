@@ -1,0 +1,28 @@
+CF --- Hotel Bytelandia
+
+# cook your dish here
+test = int(input())
+while test:
+    N = int(input())
+    arrival = list(map(int,input().split()))
+    departure = list(map(int,input().split()))
+    
+    arrival = sorted(arrival)
+    departure = sorted(departure)
+    
+    i,j = 0,0
+    curr_guest = 0
+    max_guest = 0
+    
+    while i < N and j < N:
+        if arrival[i] < departure[j]:
+            i += 1
+            curr_guest += 1
+            max_guest = max(max_guest,curr_guest)
+        else:
+            j += 1
+            curr_guest -= 1
+    
+    print(max_guest)
+    
+    test -= 1
