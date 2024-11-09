@@ -1,0 +1,30 @@
+
+Police and Thieves
+
+
+class Solution:
+    def catchThieves(self, arr, n, k): 
+        
+        police = []
+        thief = []
+        
+        for ind,elem in enumerate(arr):
+            if elem == 'P':
+                police.append(ind)
+            else:
+                thief.append(ind)
+                
+        
+        arrested = 0
+        p,t = 0,0
+        while p<len(police) and t<len(thief):
+            if abs(police[p] - thief[t]) <= k:
+                p += 1
+                t += 1
+                arrested += 1
+            elif police[p] < thief[t]:
+                p += 1
+            else:
+                t += 1
+        
+        return arrested
