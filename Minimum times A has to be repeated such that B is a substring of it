@@ -1,0 +1,17 @@
+Minimum times A has to be repeated such that B is a substring of it
+
+
+
+import math
+class Solution:
+    def minRepeats(self, A, B):
+        
+        needed_len = math.ceil(len(B) / len(A))
+        
+        if B in A * needed_len:
+            return needed_len
+        elif B in A * (needed_len + 1):
+            return needed_len + 1
+        else:
+            return -1;
+            
