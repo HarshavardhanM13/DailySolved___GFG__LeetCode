@@ -1,0 +1,36 @@
+Preorder traversal (Iterative)
+
+
+
+class Tree
+{
+    
+    ArrayList<Integer> preOrder(Node root)
+    {
+        ArrayList<Integer> al = new ArrayList<>();
+        
+        if(root == null){
+            return al; 
+        }
+        
+        Deque<Node> deque = new LinkedList<>();
+        
+        deque.addFirst(root);
+        
+        while(!deque.isEmpty()){
+            Node curr = deque.pollFirst();
+            if(curr.right != null){
+                deque.offerFirst(curr.right);
+            }
+            if(curr.left != null){
+                deque.offerFirst(curr.left);
+            }
+            
+            al.add(curr.data);
+        }
+        
+        return al;
+        
+    }
+    
+}
