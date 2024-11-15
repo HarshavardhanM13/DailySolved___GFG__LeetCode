@@ -1,0 +1,32 @@
+
+
+
+Second Largest
+
+MAX HEAP
+
+
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        
+        if(arr == null ||arr.length < 2){
+            return -1;
+        }
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        
+        for(int i: arr){
+            pq.add(i);
+        }
+        int n1 = pq.poll();
+        
+        while(!pq.isEmpty()){
+            int n2 = pq.poll();
+            if(n2!=n1){
+                return n2;
+            }
+        }
+        
+        return -1;
+    }
+}
