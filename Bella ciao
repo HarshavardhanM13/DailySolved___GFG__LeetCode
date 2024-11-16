@@ -1,0 +1,40 @@
+
+Bella ciao
+
+
+
+
+test = int(input())
+
+while test:
+    
+    D,d,P,Q = map(int,input().split())
+    
+    
+    # curr = 1
+    # interval = 0
+    # interval_count = 0
+    # printed = 0
+    # while curr <= D:
+    #     if interval == d:
+    #         interval = 0
+    #         interval_count += 1
+        
+    #     printed += (P + interval_count * Q)
+    #     #print(curr,interval_count,printed)
+    #     curr += 1
+    #     interval += 1
+    
+    # print(printed)
+    
+    printed = 0
+    
+    completed_intervals = D // d
+    remaining_intervals = D % d
+    
+    printed += (d * completed_intervals * P) + (d * Q *(completed_intervals *  (completed_intervals - 1))//2)
+    
+    printed +=   remaining_intervals  * ( P +  completed_intervals * Q)
+    print(printed)
+    test -= 1    
+        
