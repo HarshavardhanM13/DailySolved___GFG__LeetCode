@@ -1,0 +1,22 @@
+Bits Counting
+
+
+
+
+
+
+class Solution {
+    public static ArrayList<Integer> countBits(int n) {
+        
+        
+        ArrayList<Integer> al = new ArrayList<>();
+        al.add(0);
+        for(int i=1;i<=n;i++){
+            al.add(al.get(i/2) + (i%2==1?1:0));
+        }
+        
+        
+        return al;
+        
+    }
+}
