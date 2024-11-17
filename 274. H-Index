@@ -1,0 +1,26 @@
+274. H-Index
+
+
+class Solution {
+    public int hIndex(int[] citations) {
+        
+        
+        int N  = citations.length;
+        int maximum = 0;
+        int[] counts = new int[N + 1];
+
+        for(int i=0;i<N;i++){
+            counts[Math.min(N,citations[i])] += 1;
+        }
+
+        int h_count = 0;
+        for(int i=N;i>=0;i--){
+            h_count += counts[i];
+            if(h_count >= i){
+                maximum =  i;
+                break;
+            }
+        }
+        return maximum;
+    }
+}
