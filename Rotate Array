@@ -1,0 +1,29 @@
+Rotate Array
+
+
+
+
+class Solution {
+    // Function to rotate an array by d elements in counter-clockwise direction.
+    static void rotateArr(int arr[], int d) {
+        d = d % arr.length;
+        
+        int temp[] = new int[d];
+        
+        for(int i=0;i<d;i++){
+            temp[i] = arr[i];
+        }
+        
+        for(int i=d;i<arr.length;i++){
+            arr[i-d] = arr[i];
+            
+        }
+        
+        int index = arr.length - d;
+        for(int i=0;i<temp.length;i++){
+            arr[index] = temp[i];
+            index++;
+        }
+        
+    }
+}
