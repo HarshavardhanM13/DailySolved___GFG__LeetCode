@@ -1,0 +1,27 @@
+135. Candy
+
+
+
+class Solution {
+    public int candy(int[] ratings) {
+        int[] allocated = new int[ratings.length];
+        int total = 0;
+        Arrays.fill(allocated,1);
+        for(int i=1;i<ratings.length;i++){
+            if( ratings[i] > ratings[i - 1]){
+                allocated[i]  = allocated[i - 1] + 1;
+            }
+        }
+        
+        for(int i=ratings.length-2;i>=0;i--){
+            if( ratings[i] > ratings[i + 1]){
+                allocated[i]  = Math.max(allocated[i + 1] + 1,allocated[i]);
+            }
+        }
+
+        for(int count : allocated){
+            total += count;
+        }
+        return total;
+    }
+}
