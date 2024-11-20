@@ -1,0 +1,54 @@
+Linked List to Binary Tree
+
+
+
+class Solution {
+    
+    public TreeNode root = null;
+    
+    
+    public TreeNode insert(TreeNode root,int val){
+        if(root == null){
+            return new TreeNode(val);
+        }
+        else{
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.add(root);
+            
+            while(!queue.isEmpty()){
+                TreeNode current  = queue.poll();
+                
+                if(current.left == null){
+                    current.left = new TreeNode(val);
+                    break;
+                }
+                else{
+                    queue.add(current.left);
+                }
+                
+                if(current.right == null){
+                    current.right = new TreeNode(val);
+                    break;
+                } 
+                else{
+                    queue.add(current.right);
+                }
+            }
+        }
+        return root;
+    }
+    
+    public TreeNode linkedListToBinaryTree(Node head) {
+        
+        if(head == null){
+            return this.root;
+        }    
+        
+        
+        for(Node start = head;start != null;start = start.next){
+            this.root = insert(this.root,start.data);
+        }
+        
+        return this.root;
+    }
+}
