@@ -1,0 +1,28 @@
+42. Trapping Rain Water
+
+
+
+class Solution {
+    public int trap(int[] height) {
+        int left = 0;
+        int right = height.length - 1;
+        int left_max = height[left];
+        int right_max = height[right];
+        int units = 0;
+
+        while(left < right){
+            if(left_max < right_max){
+                left += 1;
+                left_max = Math.max(left_max,height[left]);
+                units += left_max - height[left];
+            }
+            else{
+                right -=1;
+                right_max = Math.max(right_max,height[right]);
+                units += right_max - height[right];
+            }
+        }
+
+        return units;
+    }
+}
