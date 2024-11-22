@@ -1,0 +1,17 @@
+Stock Buy and Sell – Max one Transaction Allowed
+
+
+
+
+class Solution:
+    def maximumProfit(self, prices):
+       
+        profit = 0
+        price = prices[0]
+        
+        for i in prices:
+            
+            price = min(price , i)    
+            profit = max(profit,abs(i - price))
+        
+        return profit
