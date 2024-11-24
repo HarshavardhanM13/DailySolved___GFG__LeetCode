@@ -1,0 +1,15 @@
+GFG CONTEST WEEKLY 24-11-24
+
+
+
+
+
+
+class Solution:
+    def findMaxX(self, n : int) -> int:
+        # code here
+        
+        k = 0
+        while 2**k <= n:
+            k+=1;
+        return k - 1
