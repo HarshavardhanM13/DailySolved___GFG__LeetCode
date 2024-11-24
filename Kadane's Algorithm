@@ -1,0 +1,26 @@
+Kadane's Algorithm
+
+
+
+
+
+// User function Template for Java
+class Solution {
+
+    // arr: input array
+    // Function to find the sum of contiguous subarray with maximum sum.
+    int maxSubarraySum(int[] arr) {
+
+        int maxsum = Integer.MIN_VALUE;
+        int sum = 0;
+        
+        for(int num : arr){
+            sum += num;
+            maxsum = Math.max(maxsum,sum);
+            if(sum<0){
+                sum = 0;
+            }
+        }
+        return maxsum;
+    }
+}
