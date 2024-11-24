@@ -1,0 +1,31 @@
+
+GFG CONTEST 24-11-24
+
+
+
+from typing import List
+
+class Solution:
+    def minTime(self, k : int, positions : List[int]) -> int:
+        
+        
+        positions.sort()
+        
+        mintime = float('inf')
+        
+        for i in range(len(positions) - k +1):
+            # take the left and roght most elems
+            left = positions[i]
+            right = positions[i + k - 1]
+            
+            # calculate time from zero to leftMost elem and then to rightMost elem
+            t1 = abs(left) + (right - left)
+            # calculate time from zero to rightMost elem and then to leftMost elem
+            t2 = abs(right) + (right - left)
+            
+            
+            # right - left is distance between right and left
+            # abs(left or right ) is due to zero to that distance 
+            mintime = min(mintime,t1,t2)
+            
+        return mintime
