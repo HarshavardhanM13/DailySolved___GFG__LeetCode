@@ -1,0 +1,37 @@
+
+Rod Cutting
+
+
+
+
+
+
+
+class Solution {
+    public int cutRod(int[] price) {
+        int[][] dp = new int[price.length][price.length + 1];
+        for(int i=0;i<dp.length;i++){
+            Arrays.fill(dp[i],-1);
+        }
+        return rec(price.length - 1,price.length,price,dp);
+    }
+    
+    
+    public int rec(int ind,int N,int[] price,int[][] dp){
+        
+        if(ind == 0){
+            return N * price[0];
+        }
+        if(dp[ind][N] != -1){
+            return dp[ind][N];
+        }
+        int notTake = 0 + rec(ind - 1,N,price,dp);
+        int take = Integer.MIN_VALUE;
+        int rlen = ind + 1;
+        if(rlen <= N){
+            take = price[ind] + rec(ind,N-rlen,price,dp);
+        }
+        dp[ind][N] = Math.max(notTake,take);
+        return dp[ind][N];
+    }
+}
