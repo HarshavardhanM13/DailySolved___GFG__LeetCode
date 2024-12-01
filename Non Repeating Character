@@ -1,0 +1,28 @@
+Non Repeating Character
+
+
+
+
+
+class Solution {
+    
+    static char nonRepeatingChar(String s) {
+        
+        LinkedHashMap<Character,Integer> lhm = new LinkedHashMap<>();
+        for(char ch : s.toCharArray()){
+            if(lhm.containsKey(ch)){
+                lhm.put(ch,lhm.get(ch)+1);
+            }
+            else{
+                lhm.put(ch,1);
+            }
+        }
+        for(Map.Entry<Character,Integer> mp : lhm.entrySet()){
+            if(mp.getValue()==1){
+                return mp.getKey();
+            }
+        }
+        
+        return '$';
+    }
+}
