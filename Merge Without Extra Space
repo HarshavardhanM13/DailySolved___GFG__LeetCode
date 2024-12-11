@@ -1,0 +1,28 @@
+Merge Without Extra Space
+
+
+
+
+class Solution {
+   
+    public void mergeArrays(int a[], int b[]) {
+        
+        int left = 0;
+        int right = a.length-1;
+        
+        while(right >=0 && left<b.length){
+            if(a[right] > b[left]){
+                int temp = b[left];
+                b[left] = a[right];
+                a[right] = temp;
+                right--;
+            }
+            left++;
+            
+        }
+        Arrays.sort(a);
+        Arrays.sort(b);
+        
+    }
+    
+}
