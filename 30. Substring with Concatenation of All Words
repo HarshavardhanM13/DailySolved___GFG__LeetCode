@@ -1,0 +1,34 @@
+30. Substring with Concatenation of All Words
+
+
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        
+        freq = {}
+        for word in words:
+            if word not in freq:
+                freq[word] = 1
+            else:
+                freq[word] += 1
+
+        n = len(words)
+        wordsize = len(words[0])
+        sublen = wordsize * n
+        start = 0
+        index = []
+
+        for start in range(len(s) - sublen + 1):
+            curr = freq.copy()
+            flag = True
+            for i in range(n):
+                sub = s[start+i*wordsize:start+(i+1)*wordsize]
+                if sub not in curr or curr[sub] == 0:
+                    flag = False
+                    break
+                curr[sub] -= 1  
+            if flag:
+                index.append(start)
+           
+
+        return index
+
