@@ -1,0 +1,13 @@
+3264. Final Array State After K Multiplication Operations I
+
+
+
+class Solution:
+    def getFinalState(self, nums: List[int], k: int, multiplier: int) -> List[int]:
+        
+        for i in range(k):
+            min_val = min(nums)
+            min_ind = nums.index(min_val)
+            nums[min_ind] = min_val * multiplier
+        
+        return nums
