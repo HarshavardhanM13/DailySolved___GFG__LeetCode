@@ -1,0 +1,15 @@
+CF -- Average Array
+
+
+test = int(input())
+for _ in range(test):
+    N,X = map(int,input().split())
+    A = []
+    if N % 2 == 1:
+        A.append(X)
+        N-=1
+    for i in range(1,N//2+1):
+        A.append(X-i)
+        A.append(X+i)
+    
+    print(*A)
