@@ -1,0 +1,21 @@
+452. Minimum Number of Arrows to Burst Balloons
+
+
+
+class Solution {
+    public int findMinArrowShots(int[][] points) {
+        Arrays.sort(points,(a,b) -> Integer.compare(a[1],b[1]));
+        int min_arrow = 1;
+        int curr = points[0][1];
+        for(int[] arr:points){
+            if(arr[0] <= curr){
+                continue;
+            }
+            else{
+                min_arrow += 1;
+                curr = arr[1];
+            }
+        }   
+        return min_arrow;
+    }
+}
