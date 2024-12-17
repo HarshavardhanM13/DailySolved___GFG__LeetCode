@@ -1,6 +1,6 @@
 CF -- Average Array
 
-
+with distinct elements
 test = int(input())
 for _ in range(test):
     N,X = map(int,input().split())
@@ -13,3 +13,16 @@ for _ in range(test):
         A.append(X+i)
     
     print(*A)
+
+without distinct elements
+test = int(input())
+while test:
+    N, X = map(int, input().split())
+    arr = list(range(1, N + 1))
+    target_sum = N * X
+    curr_sum = sum(arr)
+    shift = (target_sum - curr_sum) // N
+    arr = [shift + val for val in arr]
+    print(*arr, sep=" ")
+    test -= 1
+
