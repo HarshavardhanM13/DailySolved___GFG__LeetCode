@@ -1,0 +1,27 @@
+Celebrity Problem
+
+
+class Solution:
+    def celebrity(self, mat):
+        d = {}
+    
+        if len(mat) == 1:
+            return 0
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                if mat[i][j] == 1:
+                    if i not in d:
+                        d[i] = set()
+                    d[i].add(j)
+           
+        #print(d)         
+        for possible_key in range(len(mat)):
+            if d and possible_key not in d:  
+                for key in d:
+                    if key != possible_key and (key not in d or possible_key not in d[key]):
+                        return -1
+                return possible_key
+            elif not d:
+                return -1
+        
+        return -1
