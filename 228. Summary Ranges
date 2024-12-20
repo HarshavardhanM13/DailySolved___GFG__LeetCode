@@ -1,0 +1,26 @@
+228. Summary Ranges
+
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        
+        int curr = 0;
+        int n = nums.length;
+        int start = 0;
+        int end = 0;
+        List<String> res = new ArrayList<>();
+        while(start < n){
+            
+            while(curr + 1 < n && nums[curr] + 1 == nums[curr + 1]){
+                end = curr + 1;
+                curr += 1;
+            }
+            if(start == curr)
+            res.add("" + nums[start]);
+            else
+            res.add(nums[start] + "->" + nums[end]);
+            start = curr + 1;
+            curr += 1;
+        }
+        return res;
+    }
+}
