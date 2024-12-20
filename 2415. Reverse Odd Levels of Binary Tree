@@ -1,0 +1,50 @@
+2415. Reverse Odd Levels of Binary Tree
+
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        
+        queue = [root]
+        level = 0
+        while queue:
+            curr_len = len(queue)
+
+            if level % 2 == 0:
+                for _ in range(curr_len):
+                    curr_node = queue.pop(0)
+                    if curr_node.left:
+                        queue.append(curr_node.left)
+                    if curr_node.right:
+                        queue.append(curr_node.right)
+            else:
+                curr_level_nodes = []
+                for _ in range(curr_len):
+                    curr_node = queue.pop(0)
+                    curr_level_nodes.append(curr_node)
+                    if curr_node.left:
+                        queue.append(curr_node.left)
+                    if curr_node.right:
+                        queue.append(curr_node.right)
+                #print(curr_level_nodes)
+                left = 0
+                right = curr_len - 1
+                while left < right:
+                    n1 = curr_level_nodes[left]
+                    n2 = curr_level_nodes[right]
+
+                    if n2:
+                        temp = n1.val
+                        n1.val = n2.val
+                        n2.val = temp
+                    left += 1
+                    right -= 1
+            level += 1
+        
+        return root
