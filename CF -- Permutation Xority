@@ -1,0 +1,15 @@
+Permutation Xority
+
+test = int(input())
+for _ in range(test):
+    N = int(input())
+    if N == 2:
+        print(-1)
+        continue
+    if N % 2 == 1:
+        arr = list(range(1,N+1))
+        print(*arr)
+    else:
+        arr = list(range(4,N+1))
+        print(2,3,1,*arr)
+    
