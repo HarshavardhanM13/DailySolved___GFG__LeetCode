@@ -1,0 +1,31 @@
+383. Ransom Note
+
+
+
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        HashMap<Character,Integer> hm = new HashMap<>();
+        for(char ch : magazine.toCharArray()){
+            if(hm.containsKey(ch)){
+                hm.put(ch,hm.get(ch) + 1);
+            }
+            else{
+                hm.put(ch,1);
+            }
+        }
+        for(char ch : ransomNote.toCharArray()){
+            if(hm.containsKey(ch)){
+                if(hm.get(ch) <= 0){
+                    return false;
+                }
+                else{
+                    hm.put(ch,hm.get(ch)-1);
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+}
