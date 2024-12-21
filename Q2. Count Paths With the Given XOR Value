@@ -1,0 +1,27 @@
+Q2. Count Paths With the Given XOR Value
+
+
+class Solution:
+    def countPathsWithXorValue(self, grid: List[List[int]], k: int) -> int:
+        MOD = 10 ** 9 + 7
+        dp = {}
+        def rec(row,col,xor,k,grid,dp):
+            
+            if row >= len(grid) or col >= len(grid[0]):
+                return 0
+            
+            xor = xor ^ grid[row][col]
+            
+            if row == len(grid) - 1 and col == len(grid[0]) - 1: 
+                return 1 if xor == k else 0
+
+            if (row,col,xor) in dp:
+                return dp[(row,col,xor)]
+            
+            right = rec(row,col + 1,xor,k,grid,dp)
+            down = rec(row + 1,col,xor,k,grid,dp)
+
+            dp[(row,col,xor)] = (right + down) % MOD;
+            return dp[(row,col,xor)]
+
+        return rec(0,0,0,k,grid,dp)©leetcode
