@@ -1,0 +1,21 @@
+Q1. Count Subarrays of Length Three With a Condition
+
+
+
+
+
+class Solution {
+    public int countSubarrays(int[] nums) {
+        int sub_array_count = 0;
+        int sum = 0;
+        for(int i=0;i<nums.length - 2;i++){
+            sum = 0;
+            sum += nums[i];
+            sum += nums[i+2];
+            if(sum == (nums[i+1]/2.0)){
+                sub_array_count += 1;
+            }
+        }
+        return sub_array_count;
+    }
+}©leetcode
