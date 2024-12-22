@@ -1,0 +1,16 @@
+
+Maximum Number of Distinct Elements After Operations
+
+
+
+class Solution:
+    def maxDistinctElements(self, nums: List[int], k: int) -> int:
+        uniques = set()
+        nums.sort()
+        prev = float('-inf')
+        for num in nums:
+            val = max(prev + 1 , num - k)
+            if(val <= num + k):
+                uniques.add(val)
+                prev = val
+        return len(uniques)
