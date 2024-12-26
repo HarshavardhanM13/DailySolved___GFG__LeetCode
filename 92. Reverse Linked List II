@@ -1,0 +1,44 @@
+92. Reverse Linked List II
+
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        left_node = None
+        right_node = None
+        count = 1
+        curr = head
+        prev = None
+        prev_left = None
+        right_next = None
+        while curr:
+            if count == left:
+                prev_left = prev
+                left_node = curr
+            if count == right:
+                right_next = curr.next
+                right_node = curr
+                break
+            count += 1
+            prev = curr
+            curr = curr.next
+
+        
+        curr = left_node
+        prev = None
+        while curr:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+        if prev_left:
+            prev_left.next = right_node
+        else:
+            head = right_node
+        left_node.next = right_next
+        return head
