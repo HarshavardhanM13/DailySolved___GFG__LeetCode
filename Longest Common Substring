@@ -1,0 +1,31 @@
+
+Longest Common Substring
+
+
+
+
+
+class Solution {
+    public int longestCommonSubstr(String s1, String s2) {
+        
+        int[] prev = new int[s2.length() + 1];
+        int[] curr = new int[s2.length() + 1];
+        int ans = 0;
+        
+        for(int i=1;i<=s1.length();i++){
+            for(int j=1;j<=s2.length();j++){
+                if(s1.charAt(i-1) == s2.charAt(j-1)){
+                    curr[j] = 1 + prev[j-1];
+                    ans = Math.max(curr[j],ans);
+                }
+                else{
+                    curr[j] = 0;
+                }
+            }
+            int[] temp = curr;
+            curr = prev;
+            prev = temp;
+        }
+        return ans;
+    }
+}
