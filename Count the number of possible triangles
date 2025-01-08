@@ -1,0 +1,44 @@
+Count the number of possible triangles
+
+
+
+class Solution:
+    #Function to count the number of possible triangles.
+    def countTriangles(self, arr):
+        
+        
+        # arr.sort()
+        # count = 0
+        
+        # def backtrack(ind,triangle):
+        #     nonlocal count
+            
+        #     if len(triangle) == 3:
+        #         if(triangle[0] + triangle[1] > triangle[2]):
+        #             count += 1
+        #             return 
+                
+        #     for i in range(ind,len(arr)):
+        #         triangle.append(arr[i])
+        #         backtrack(i + 1,triangle)
+        #         triangle.pop()
+            
+        
+        # for i in range(len(arr)):
+        #     backtrack(i+1,[arr[i]])
+            
+        # return count
+        
+        arr.sort()
+        count = 0 
+        for i in range(2,len(arr)):
+            left = 0
+            right = i - 1
+            
+            while left < right:
+                if arr[left] + arr[right] > arr[i]:
+                    count += (right - left)
+                    right -= 1
+                else:
+                    left += 1
+        return count
