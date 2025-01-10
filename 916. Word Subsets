@@ -1,0 +1,30 @@
+
+916. Word Subsets
+
+
+
+class Solution:
+    def wordSubsets(self, words1: List[str], words2: List[str]) -> List[str]:
+        
+        max_freq = {}
+
+        for word in words2:
+            word_freq = {}
+            for ch in word:
+                word_freq[ch] = word_freq.get(ch,0) + 1
+            for key, value in word_freq.items():
+                max_freq[key] = max(max_freq.get(key,0),word_freq[key])
+
+        result = []
+        for word in words1:
+            word_freq = {}
+            for ch in word:
+                word_freq[ch] = word_freq.get(ch,0) + 1
+            count = 0
+            for key , value in max_freq.items():
+                if word_freq.get(key,0) >= max_freq[key]:
+                    count += 1
+            if count == len(max_freq):
+                result.append(word)
+        
+        return result  
