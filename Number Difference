@@ -1,0 +1,25 @@
+
+
+
+
+
+class Solution:
+    def numDifference(self, n : int) -> int:
+        # code here
+        binary = bin(n)
+        bits = list(binary[2:])
+        
+        for i in range(len(bits)):
+            if bits[i] == '1':
+                bits[i] = 0
+            else:
+                bits[i] = 1
+        #print(bits)
+        num = 0
+        power = 0
+        for bit in bits[::-1]:
+            if bit == 1:
+                num += (2**power)
+            power+=1
+            
+        return abs(num - n)
