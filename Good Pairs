@@ -1,0 +1,17 @@
+
+
+
+
+# cnt = 0
+        
+        # for i in range(n+1):
+        #     for j in range(i,n+1):
+        #         if (j - i) % k == 0:
+        #             cnt += 1
+        # return cnt % (10**9 + 7)
+        
+        fg = n // k
+        rem = n % k
+        tot = (fg * ( fg + 1) // 2) * k
+        tot += (rem + 1) * (fg + 1)
+        return tot % ( 10 ** 9 + 7)
