@@ -1,0 +1,35 @@
+Undirected Graph Cycle
+
+
+
+
+
+from typing import List
+class Solution:
+    #Function to detect cycle in an undirected graph.
+	def isCycle(self, V: int, adj: List[List[int]]) -> bool:
+		#Code here
+		
+		def cycle(src,vis):
+		    vis[src] = True
+		    q = [(src,-1)]
+            
+            while q:
+                node = q[0][0]
+                parent = q[0][1]
+                q.pop(0)
+                
+                for nodes in adj[node]:
+                    if not vis[nodes]:
+                        vis[nodes] = True
+                        q.append((nodes,node))
+                    elif parent != nodes:
+                        return True
+            return False
+        
+        vis = [False] * V
+        for i in range(V):
+            if not vis[i]:
+                if cycle(i,vis):
+                    return True
+        return False
