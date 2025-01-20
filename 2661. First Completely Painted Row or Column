@@ -1,0 +1,26 @@
+2661. First Completely Painted Row or Column
+
+
+
+class Solution:
+    def firstCompleteIndex(self, arr: List[int], mat: List[List[int]]) -> int:
+        
+        val_map = {}
+        for row in range(len(mat)):
+            for col in range(len(mat[row])):
+                val = mat[row][col]
+                val_map[val] = (row,col)
+        
+        rows = [0] * len(mat)
+        cols = [0] * len(mat[0])
+
+        for ind,val in enumerate(arr):
+            row,col = val_map[val]
+            rows[row] += 1
+            if rows[row] == len(mat[0]):
+                return ind
+            cols[col] += 1
+            if cols[col] == len(mat):
+                return ind
+        
+        return -1
