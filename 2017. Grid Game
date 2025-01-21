@@ -1,0 +1,21 @@
+2017. Grid Game
+
+
+class Solution:
+    def gridGame(self, grid: List[List[int]]) -> int:
+        
+
+        prefix1 = grid[0].copy()
+        prefix2 = grid[1].copy()
+
+        for i in range(1,len(grid[0])):
+            prefix1[i] += prefix1[i-1]
+            prefix2[i] += prefix2[i-1]
+        
+        result = float('inf')
+        for i in range(len(grid[0])):
+            tp = prefix1[-1] - prefix1[i]
+            bc = prefix2[i-1] if i > 0 else 0
+            sr = max(tp,bc)
+            result = min(sr,result)
+        return result
