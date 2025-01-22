@@ -1,0 +1,34 @@
+Add Number Linked Lists
+
+
+
+
+class Solution:
+    def addTwoLists(self, num1, num2):
+        # code here
+        n1 = ""
+        n2 = ""
+        node1 = num1
+        node2 = num2
+        
+        while node1:
+            n1 += str(node1.data)
+            node1 = node1.next
+        
+        while node2:
+            n2 += str(node2.data)
+            node2 = node2.next
+        
+        res = str(int(n1) + int(n2))
+        res_node = None
+        for i in range(len(res)):
+            node = Node(int(res[i]))
+            if not res_node:
+                res_node = node
+                temp = res_node
+            else:
+                temp.next=node
+                temp=temp.next
+        
+        return res_node
+
