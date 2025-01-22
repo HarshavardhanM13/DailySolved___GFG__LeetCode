@@ -1,0 +1,34 @@
+1765. Map of Highest Peak
+
+
+
+class Solution:
+    def highestPeak(self, isWater: List[List[int]]) -> List[List[int]]:
+        
+        rows = len(isWater)
+        cols = len(isWater[0])
+
+        res = [[-1] * cols for i in range(rows)]
+        queue = deque()
+        visited = set()
+
+        for i in range(rows):
+            for j in range(cols):
+                if isWater[i][j] == 1:
+                    queue.append((i,j))
+                    res[i][j] = 0
+                    visited.add((i,j))
+        
+        while queue:
+            i,j = queue.popleft()
+            height = res[i][j]
+
+            neighbours = [[i+1,j],[i-1,j],[i,j+1],[i,j-1]]
+            for r,c in neighbours:
+                if r<0 or c<0 or r==rows or c==cols or (r,c) in visited:
+                    continue
+                queue.append((r,c))
+                res[r][c] = height + 1
+                visited.add((r,c))
+        return res
+            
