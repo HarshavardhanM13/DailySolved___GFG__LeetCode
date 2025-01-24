@@ -1,0 +1,23 @@
+
+Detect Loop in linked list
+
+
+
+
+class Solution {
+    // Function to check if the linked list has a loop.
+    public static boolean detectLoop(Node head) {
+        HashMap<Node,Integer> hm = new HashMap<>();
+        int ind = 0;
+        while(head != null){
+            if(hm.containsKey(head)){
+                return true;
+            }
+            else{
+                hm.put(head,ind++);
+                head = head.next;
+            }
+        }
+        return false;
+    }
+}
