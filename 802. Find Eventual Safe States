@@ -1,0 +1,25 @@
+802. Find Eventual Safe States
+
+
+
+class Solution:
+    def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+        
+        hm = {}
+        res = []
+
+        def dfs(curr):
+            if curr in hm:
+                return hm[curr]
+            hm[curr] = False
+            for adjnode in graph[curr]:
+                if not dfs(adjnode):
+                    return hm[adjnode]
+            hm[curr] = True
+            return hm[curr]
+        
+        for i in range(len(graph)):
+            if dfs(i):
+                res.append(i)
+       # print(hm)
+        return res
