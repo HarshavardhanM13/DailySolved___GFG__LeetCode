@@ -1,0 +1,29 @@
+
+198. House Robber
+
+class Solution {
+    
+    public int rob(int[] nums) {
+        int n = nums.length;
+        int[] dp = new int[n];
+        for(int i=0;i<n;i++){
+            dp[i] = -1;
+        }
+        return backtrack(0,nums,dp,n);
+    }
+
+    int backtrack(int ind,int[] nums,int[] dp,int n){
+        if(ind >= n){
+            return 0;
+        }
+        if(dp[ind] != -1){
+            return dp[ind];
+        }
+        int picked = nums[ind] + backtrack(ind + 2,nums,dp,n);
+        int not_picked = backtrack(ind + 1,nums,dp,n);
+        dp[ind] = Math.max(picked,not_picked);
+        return dp[ind];
+    }
+
+    
+}
