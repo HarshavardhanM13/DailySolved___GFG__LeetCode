@@ -1,0 +1,37 @@
+
+70. Climbing Stairs
+
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+
+                                #TLE
+        # def backtrack(ind):
+        #     if ind > n:
+        #         return 0
+        #     if ind == n:
+        #         return 1
+
+        #     climb_1 = backtrack(ind + 1)
+        #     climb_2 = backtrack(ind + 2)
+
+        #     return climb_1 + climb_2
+
+        # return backtrack(0) 
+        
+
+        dp = {}
+        def backtrack(ind):
+            if ind > n:
+                return 0
+            if ind == n:
+                return 1
+            if ind in dp:
+                return dp[ind]
+
+            climb_1 = backtrack(ind + 1)
+            climb_2 = backtrack(ind + 2)
+            dp[ind] = climb_1 + climb_2
+            return dp[ind]
+
+        return backtrack(0) 
