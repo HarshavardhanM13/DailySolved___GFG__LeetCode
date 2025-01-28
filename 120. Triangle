@@ -1,0 +1,27 @@
+120. Triangle
+
+
+
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int n = triangle.size();
+        int[][] dp = new int[n][];
+        for (int i = 0; i < n; i++) {
+            dp[i] = new int[triangle.get(i).size()];
+            Arrays.fill(dp[i], -1);
+        }
+        return backtrack(0,0,triangle.size(),triangle,dp);
+    }
+    int backtrack(int i,int j,int n,List<List<Integer>> triangle,int[][]dp){
+        if(i == n-1){
+            return triangle.get(i).get(j);
+        }
+        if(dp[i][j] != -1){
+            return dp[i][j];
+        }
+        int down = triangle.get(i).get(j) + backtrack(i+1,j,n,triangle,dp);
+        int diag = triangle.get(i).get(j) + backtrack(i+1,j+1,n,triangle,dp);
+        dp[i][j] = Math.min(down,diag);
+        return dp[i][j];
+    }
+}
