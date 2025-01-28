@@ -1,0 +1,32 @@
+Permutations of a String
+
+
+
+class Solution {
+    
+    ArrayList<String> result = new ArrayList<>();
+    Set<String> set = new HashSet<>();
+    public ArrayList<String> findPermutation(String s) {
+            StringBuilder sb = new StringBuilder(s);
+            permutations(sb,0);
+            for(String str : set){
+                result.add(str);
+            }
+            return result;
+    }
+    void permutations(StringBuilder sb,int start){
+        if(sb.length() == start){
+            set.add(sb.toString());
+        }
+        
+        for(int i = start;i<sb.length();i++){
+            char ch = sb.charAt(i);
+            sb.setCharAt(i,sb.charAt(start));
+            sb.setCharAt(start,ch);
+            permutations(sb,start + 1);
+            ch = sb.charAt(i);
+            sb.setCharAt(i,sb.charAt(start));
+            sb.setCharAt(start,ch);
+        }
+    }
+}
