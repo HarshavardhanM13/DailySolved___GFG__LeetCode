@@ -1,0 +1,26 @@
+77. Combinations
+
+
+
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();
+    public List<List<Integer>> combine(int n, int k) {
+        for(int i=1;i<=n;i++){
+            backtrack(i,n,k,new ArrayList<>());
+        }
+        return result;
+    }
+
+    public void backtrack(int curr,int n,int k,List<Integer> comb){
+        //System.out.println(curr);
+        comb.add(curr);
+        if(comb.size() == k){
+            result.add(new ArrayList<>(comb));
+            return ;
+        }
+        for(int i = curr + 1;i<=n;i++){
+            backtrack(i,n,k,comb);
+            comb.remove(comb.size()-1);
+        }
+    }
+}
