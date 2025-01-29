@@ -1,0 +1,36 @@
+64. Minimum Path Sum
+
+
+class Solution {
+    int[][] dp;
+    public int minPathSum(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        dp = new int[m][n];
+        for(int[] rows : dp){
+            Arrays.fill(rows,-1);
+        }
+        //dp[grid.length -1][grid[0].length-1] = grid[grid.length - 1][grid[0].length - 1];
+        return backtrack(0,0,grid);
+    }
+    public int backtrack(int i,int j,int[][] grid){
+        int m = grid.length, n = grid[0].length;
+
+        if(i < 0 || j < 0 || i >= m || j >= n){
+            return 20000001;
+        }
+
+        if(dp[i][j] != -1){
+            return dp[i][j];
+        }
+        
+        if(i == m - 1 && j == n - 1){
+            return dp[i][j] = grid[i][j];
+        }
+
+        int right = backtrack(i,j+1,grid);
+        int down = backtrack(i+1,j,grid);
+
+        dp[i][j] = grid[i][j]  + Math.min(right,down);
+        return dp[i][j];
+    }
+}
