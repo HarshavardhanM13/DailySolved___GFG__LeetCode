@@ -1,0 +1,41 @@
+63. Unique Paths II
+
+
+class Solution {
+
+    int[][] dp;
+    
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        dp = new int[m][n];
+        for(int[] row : dp){
+            Arrays.fill(row,-1);
+        }
+        return backtrack(0,0,obstacleGrid,m,n);
+    }
+
+    int backtrack(int i,int j,int[][] arr,int m,int n){
+        if(i >= m || j >= n){
+            return 0;
+        }
+        if(arr[i][j] == 1){
+            dp[i][j] = 0;
+            return 0;
+        }
+        if(dp[i][j] != -1){
+            return dp[i][j];
+        }
+        if(i == m-1 && j == n-1){
+            return 1;
+        }
+        
+        int right = backtrack(i,j + 1,arr,m,n);
+        int down = backtrack(i + 1,j,arr,m,n);
+
+        dp[i][j] = right + down;
+        return dp[i][j];
+    }
+    
+
+}
