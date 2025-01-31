@@ -1,0 +1,35 @@
+
+300. Longest Increasing Subsequence
+
+
+class Solution {
+    
+    int[][] dp;
+
+    public int lengthOfLIS(int[] nums) {
+        
+        int n = nums.length;
+        dp = new int[n][n+1];
+        for(int[] rows : dp){
+            Arrays.fill(rows,-1);
+        }
+
+        return backtrack(0,-1,nums,n);
+    }
+
+    int backtrack(int ind, int prevind, int[] arr,int n){
+        if(ind == n){
+            return 0;
+        }
+        if(dp[ind][prevind + 1] != -1){
+            return dp[ind][prevind + 1];
+        }
+        int len = backtrack(ind + 1,prevind,arr,n);
+        if(prevind == -1 || arr[ind] > arr[prevind]){
+            len = Math.max(len,1 + backtrack(ind + 1,ind,arr,n));
+        }
+        dp[ind][prevind + 1] = len;
+        return dp[ind][prevind + 1];
+    }
+
+}
