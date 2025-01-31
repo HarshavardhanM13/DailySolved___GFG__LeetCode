@@ -1,0 +1,31 @@
+
+46. Permutations
+
+
+class Solution {
+
+    List<List<Integer>> result = new ArrayList<>();
+    public List<List<Integer>> permute(int[] nums) {
+        backtrack(0,nums);
+        return result;
+    }
+    void backtrack(int start,int[] nums){
+        if(start  == nums.length){
+            List<Integer> al = new ArrayList<>();
+            for(int num : nums){
+                al.add(num);
+            }
+            result.add(al);
+            return ;
+        }
+        for(int i= start;i<nums.length;i++){
+            int temp = nums[i];
+            nums[i] = nums[start];
+            nums[start] = temp;
+            backtrack(start + 1,nums);
+            temp = nums[i];
+            nums[i] = nums[start];
+            nums[start] = temp;
+        }
+    }
+}
