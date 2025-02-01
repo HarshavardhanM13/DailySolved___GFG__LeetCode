@@ -1,0 +1,32 @@
+39. Combination Sum
+
+
+class Solution {
+
+    Set<List<Integer>> hs = new HashSet<>();
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        backtrack(0,0,new ArrayList<>(),candidates,target);
+        List<List<Integer>> al = new ArrayList<>();
+        for(List<Integer> curr : hs){
+            al.add(curr);
+        } 
+        return al;
+    }
+
+    void backtrack(int ind,int curr_sum,List<Integer> al,int[] candidates,int target){
+        if(curr_sum > target){
+            return ;
+        }
+        if (ind >= candidates.length) return;
+        if(curr_sum == target){
+            hs.add(new ArrayList<>(al));
+            return ;
+        }
+        al.add(candidates[ind]);
+        curr_sum += candidates[ind];
+        backtrack(ind,curr_sum,al,candidates,target);
+        al.remove(al.size() - 1);
+        curr_sum -= candidates[ind];
+        backtrack(ind + 1,curr_sum,al,candidates,target);
+    }
+}
