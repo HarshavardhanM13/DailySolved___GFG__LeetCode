@@ -1,0 +1,46 @@
+Word Search
+
+
+
+
+
+class Solution {
+    
+    static public boolean isWordExist(char[][] mat, String word) {
+        boolean[][] vis = new boolean[mat.length][mat[0].length];
+        for(int i=0;i<mat.length;i++){
+            for(int j=0;j<mat[0].length;j++){
+                if(mat[i][j] == word.charAt(0)){
+                    if(backtrack(i,j,0,word,mat,vis)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    static boolean backtrack(int i,int j,int curr,String word,char[][] mat,boolean[][] vis){
+        if(i<0 || j<0 || i>=mat.length || j>= mat[0].length || vis[i][j] || curr >= word.length()){
+            return false;
+        }
+        if(mat[i][j] != word.charAt(curr)){
+            return false;
+        }
+        if(curr == word.length() - 1){
+            return true;
+        }
+        
+        vis[i][j] = true;
+        boolean left = backtrack(i,j-1,curr + 1,word,mat,vis);
+        boolean right = backtrack(i,j+1,curr + 1,word,mat,vis);
+        boolean down = backtrack(i+1,j,curr + 1,word,mat,vis);
+        boolean up = backtrack(i-1,j,curr + 1,word,mat,vis);
+        vis[i][j] = false; 
+        if(left || right || down || up){
+            return true;
+        }
+        return false;
+    }
+    
+}
