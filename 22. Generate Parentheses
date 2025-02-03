@@ -1,0 +1,27 @@
+22. Generate Parentheses
+
+
+
+
+class Solution {
+
+    List<String> result = new ArrayList<>();
+
+    public List<String> generateParenthesis(int n) {
+        backtrack(0,0,n,"");    
+        return result;
+    }
+    void backtrack(int open,int close,int n,String parentheses){
+        if(open > n || close > n){
+            return ;
+        }
+        if(open == n && close == n){
+            result.add(new String(parentheses));
+            return ;
+        }
+        backtrack(open + 1,close,n,parentheses + "(");
+        if(close < open){
+            backtrack(open,close + 1,n,parentheses + ")");
+        }
+    }
+}
