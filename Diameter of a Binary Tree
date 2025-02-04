@@ -1,0 +1,19 @@
+Diameter of a Binary Tree
+
+
+class Solution {
+    int max_height = 0;
+    int diameter(Node root) {
+        max_diameter(root);
+        return max_height;
+    }
+    public int max_diameter(Node root){
+        if(root == null){
+            return 0;
+        }
+        int left = max_diameter(root.left);
+        int right = max_diameter(root.right);
+        max_height = Math.max(max_height,left + right);
+        return 1 + Math.max(left,right);
+    }
+}
