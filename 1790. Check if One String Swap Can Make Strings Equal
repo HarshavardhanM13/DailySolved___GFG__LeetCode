@@ -1,0 +1,26 @@
+1790. Check if One String Swap Can Make Strings Equal
+
+
+
+class Solution {
+    public boolean areAlmostEqual(String s1, String s2) {
+        if(s1.length() != s2.length()){
+            return false;
+        }
+        List<Integer> diff_ind = new ArrayList<>();
+        for(int i=0;i<s1.length();i++){
+            if(s1.charAt(i) != s2.charAt(i)){
+                diff_ind.add(i);
+            }
+        }
+        if(diff_ind.size() == 0){
+            return true;
+        }
+        if(diff_ind.size() == 2){
+            int ind1 = diff_ind.get(0);
+            int ind2 = diff_ind.get(1);
+            return s1.charAt(ind1) == s2.charAt(ind2) && s1.charAt(ind2) == s2.charAt(ind1);
+        }
+        return false;
+    }
+}
