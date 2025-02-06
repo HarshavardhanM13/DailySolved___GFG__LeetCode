@@ -1,0 +1,17 @@
+Inorder Traversal
+
+class Solution:
+    
+    def __init__(self):
+        self.arr = []
+        
+    def inOrder(self,root):
+    
+        if not root:
+            return self.arr
+        
+        self.inOrder(root.left)
+        self.arr.append(root.data)
+        self.inOrder(root.right)
+        
+        return self.arr
