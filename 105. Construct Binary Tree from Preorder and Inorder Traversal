@@ -1,0 +1,53 @@
+105. Construct Binary Tree from Preorder and Inorder Traversal
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    HashMap<Integer,Integer> hm = new HashMap<>();
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        int n = inorder.length - 1;
+        for(int i=0;i<=n;i++){
+            hm.put(inorder[i],i);
+        }
+        int[] preInd = {0};
+        return buildTree(preorder,inorder,preInd,0,n);
+    }
+    public TreeNode buildTree(int[] preorder,int[] inorder,int[] preInd,int left,int right){
+        if(left > right){
+            return null;
+        }
+
+        TreeNode root = new TreeNode(preorder[preInd[0]]);
+        //int root_ind = findRootInd(inorder,preorder[preInd[0]],left,right);
+        int root_ind = hm.get(preorder[preInd[0]]);
+        preInd[0]++;
+
+        root.left = buildTree(preorder,inorder,preInd,left,root_ind - 1);
+        root.right = buildTree(preorder,inorder,preInd,root_ind + 1,right);
+
+        return root;
+    }
+    public int findRootInd(int[] inorder,int rootVal,int left,int right){
+        for(int i=left;i<=right;i++){
+            if(inorder[i] == rootVal){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
