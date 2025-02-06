@@ -1,0 +1,39 @@
+Construct Tree from Inorder & Preorder 2
+
+
+
+
+class Solution {
+    
+    static Map<Integer,Integer> hm = new HashMap<>();
+    public static Node buildTree(int inorder[], int preorder[]) {
+        int n = preorder.length;
+        for(int i=0;i<n;i++){
+            hm.put(inorder[i],i);
+        }
+        int[] preInd = {0};
+        return buildTree(preorder,inorder,preInd,0,n-1);
+    }
+    static Node buildTree(int[] preorder,int[] inorder,int[] preInd,int left,int right){
+        if(left > right){
+            return null;
+        }
+        //int rootElem = findRootElemInd(inorder,preorder[preInd[0]],left,right);
+        int rootElem = hm.get(preorder[preInd[0]]);
+        preInd[0]++;
+        
+        Node root = new Node(inorder[rootElem]);
+        root.left = buildTree(preorder,inorder,preInd,left,rootElem - 1);
+        root.right = buildTree(preorder,inorder,preInd,rootElem + 1,right);
+        
+        return root;
+    }
+    // static int findRootElemInd(int[] inorder,int rootElem,int left,int right){
+    //     for(int i=left;i<=right;i++){
+    //         if(inorder[i] == rootElem){
+    //             return i;
+    //         }
+    //     }
+    //     return -1;
+    // }
+}
