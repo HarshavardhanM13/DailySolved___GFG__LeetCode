@@ -1,0 +1,35 @@
+
+82. Remove Duplicates from Sorted List II PYTHON SET
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
+        duplicates = set()
+        curr = head.next
+        prev = head
+        stack = [head.val]
+        while curr:
+            if stack[-1] == curr.val:
+                duplicates.add(curr)
+                duplicates.add(prev)
+            stack.append(curr.val)
+            prev = curr
+            curr = curr.next
+        #print(stack,duplicates,sep='\n')
+        curr = head
+        res = ListNode(-1)
+        temp = res
+        while curr:
+            if curr not in duplicates:
+                temp.next = curr
+                temp = curr
+            curr = curr.next
+        temp.next = None
+        return res.next
