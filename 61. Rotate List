@@ -1,0 +1,44 @@
+61. Rotate List
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null){
+            return head;
+        }
+        ListNode curr = head;
+        int n = 0;
+        while(curr != null){
+            n++;
+            curr = curr.next;
+        }
+        curr = head;
+        k = k % n;
+        if(k == 0){
+            return head;
+        }
+        k = n - k;
+        ListNode end = null;
+        for(int i=1;i<n;i++){
+            if(i == k){
+                end = curr;
+            }
+            curr = curr.next;
+        }
+        ListNode start = end.next;
+        end.next = null;
+        curr.next = head;
+        return start;
+
+    }
+}
