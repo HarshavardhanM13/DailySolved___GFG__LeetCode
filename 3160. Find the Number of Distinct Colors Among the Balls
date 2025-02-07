@@ -1,0 +1,24 @@
+3160. Find the Number of Distinct Colors Among the Balls
+
+
+
+class Solution:
+    def queryResults(self, limit: int, queries: List[List[int]]) -> List[int]:
+        
+
+        result = []
+        hm = {}
+        till = {}
+
+        for ball,color in queries:
+            if ball not in hm:
+                hm[ball] = color
+                till[color] = till.get(color,0) + 1
+            else:
+                till[hm[ball]] = till[hm[ball]] - 1
+                if till[hm[ball]] <= 0:
+                    del till[hm[ball]]
+                hm[ball] = color
+                till[color] = till.get(color,0) + 1
+            result.append(len(till))
+        return result
