@@ -1,0 +1,40 @@
+114. Flatten Binary Tree to Linked List
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public void flatten(TreeNode root) {
+        rec(root);
+    }
+    public TreeNode rec(TreeNode root){
+        if(root == null){
+            return null;
+        }
+        
+        TreeNode left = rec(root.left);
+        TreeNode right = rec(root.right);
+
+        if(left != null){
+            left.right = root.right;
+            root.right = root.left;
+            root.left = null;
+        }
+
+        return right == null? (left == null ? root : left) : right;
+    }
+}
