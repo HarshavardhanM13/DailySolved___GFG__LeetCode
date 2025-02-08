@@ -1,0 +1,55 @@
+Tree Boundary Traversal
+
+
+
+
+
+
+class Solution:
+    def boundaryTraversal(self, root):
+        if not root:
+            return []
+    
+        result = []
+        visited = set()
+    
+        def leftboundary(root):
+            if not root or (not root.left and not root.right):
+                return
+            result.append(root.data)
+            visited.add(root)
+            if root.left:
+                leftboundary(root.left)
+            else:
+                leftboundary(root.right)
+    
+        def rightboundary(root):
+            if not root or (not root.left and not root.right):
+                return
+            if root.right:
+                rightboundary(root.right)
+            else:
+                rightboundary(root.left)
+            if root not in visited:
+                result.append(root.data)
+                visited.add(root)
+    
+        def lowboundary(root):
+            if not root:
+                return
+            if not root.left and not root.right and root not in visited:
+                visited.add(root)
+                result.append(root.data)
+            lowboundary(root.left)
+            lowboundary(root.right)
+    
+        if root.left or root.right:
+            result.append(root.data)
+            visited.add(root)
+    
+        leftboundary(root.left)
+        lowboundary(root)
+        rightboundary(root.right)
+    
+        return result
+
