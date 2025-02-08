@@ -1,0 +1,30 @@
+
+2349. Design a Number Container System
+
+
+
+
+class NumberContainers:
+
+    def __init__(self):
+        self.container = {}
+        self.numberInd = collections.defaultdict(SortedSet)
+
+    def change(self, index: int, number: int) -> None:
+        if index in self.container:
+            prev = self.container[index]
+            self.numberInd[prev].remove(index)
+            if not self.numberInd[prev]:
+                del self.numberInd[prev]
+        self.container[index] = number
+        self.numberInd[number].add(index)
+
+    def find(self, number: int) -> int:
+        if number in self.numberInd and self.numberInd[number]:
+            return self.numberInd[number][0]
+        return -1
+
+# Your NumberContainers object will be instantiated and called as such:
+# obj = NumberContainers()
+# obj.change(index,number)
+# param_2 = obj.find(number)
