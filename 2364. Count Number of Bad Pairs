@@ -1,0 +1,18 @@
+
+2364. Count Number of Bad Pairs
+
+
+
+class Solution:
+    def countBadPairs(self, nums: List[int]) -> int:
+        
+        hm = {}
+        bad = 0
+
+        for i in range(len(nums)):
+            diff = i - nums[i]
+            gp = hm.get(diff,0) 
+            bad += i - gp
+            hm[diff] = gp + 1
+
+        return bad
