@@ -1,0 +1,25 @@
+
+
+GFG - 193 - 1
+
+
+class Solution:
+    def minOperation(self, s: str) -> int:
+        
+        caps = {}
+        hmlow = {}
+        for ch in s:
+            if ch not in hmlow:
+                hmlow[ch] = 1
+            else:
+                hmlow[ch] += 1
+        
+        count = 0
+        for ch in s:
+            up = ch.swapcase()
+            if up in hmlow:
+                pair_count = min(hmlow[up],hmlow[ch])
+                hmlow[up] -= pair_count
+                hmlow[ch] -= pair_count
+        
+        return sum(hmlow.values())//2
