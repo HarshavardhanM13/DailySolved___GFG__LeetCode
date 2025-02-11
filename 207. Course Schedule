@@ -1,0 +1,32 @@
+207. Course Schedule
+
+
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        
+        adjList = [[] for _ in range(numCourses)]
+        visited = [0] * numCourses
+        for course in prerequisites:
+            adjList[course[1]].append(course[0])
+        
+        def dfs(i,rec_stack):
+            visited[i] = 1
+            rec_stack.add(i)
+            for adjnode in adjList[i]:
+                if visited[adjnode] == 0:
+                    if dfs(adjnode,rec_stack):
+                        return True
+                elif adjnode in rec_stack:
+                    return True
+            rec_stack.remove(i)
+            return False
+            
+        rec_stack = set()
+        for i in range(numCourses):
+            if visited[i] == 0:
+                if dfs(i,rec_stack):
+                    return False
+        
+        return True
+                
