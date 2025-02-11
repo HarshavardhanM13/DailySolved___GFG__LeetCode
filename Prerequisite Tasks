@@ -1,0 +1,51 @@
+Prerequisite Tasks
+
+
+
+
+class Solution {
+    
+    List<List<Integer>> adjList = new ArrayList<>();
+    int[] visited = null;
+    
+    public boolean isPossible(int N,int P, int[][] prerequisites)
+    {
+        
+        for(int i=0;i<N;i++){
+            adjList.add(new ArrayList<>());
+        }
+        for(int[] task : prerequisites){
+            adjList.get(task[1]).add(task[0]);
+        }
+        
+        visited = new int[N];
+        Set<Integer> rec_stack = new HashSet<>();
+        
+        for(int i=0;i<N;i++){
+            if(visited[i] == 0){
+                if(dfs(i,rec_stack)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    public boolean dfs(int i,Set<Integer> rec_stack){
+        visited[i] = 1;
+        rec_stack.add(i);
+        for(int adjnode : adjList.get(i)){
+            if(visited[adjnode] == 0){
+                if(dfs(adjnode,rec_stack)){
+                    return true;
+                }
+            }
+            else if(rec_stack.contains(adjnode)){
+                return true;
+            }
+        }
+        rec_stack.remove(i);
+        return false;
+    }
+    
+}
