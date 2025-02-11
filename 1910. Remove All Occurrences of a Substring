@@ -1,0 +1,35 @@
+
+1910. Remove All Occurrences of a Substring
+
+
+
+
+class Solution:
+    def removeOccurrences(self, s: str, part: str) -> str:
+        
+        s = [ch for ch in s]
+        part = [ch for ch in part]
+
+        i = 0
+        while i < len(s) and len(s) > len(part):
+            if s[i] == part[0]:
+                flag = False
+                for j in range(len(part)):
+                    if s[i + j] != part[j]:
+                        break
+                    if j + 1 == len(part):
+                        pref = s[ : i]
+                        suff = s[i + len(part)  :]    
+                        s = pref + suff
+                        flag = True
+                        break
+                if flag:
+                    i = -1
+            i += 1
+        
+        s =  ''.join(s)
+        part = ''.join(part)
+        if s == part:
+            return ""
+        else:
+            return s
