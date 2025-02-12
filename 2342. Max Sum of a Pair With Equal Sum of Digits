@@ -1,0 +1,29 @@
+2342. Max Sum of a Pair With Equal Sum of Digits
+
+
+
+
+class Solution:
+    def maximumSum(self, nums: List[int]) -> int:
+        
+        hm = {}
+
+        for num in nums:
+            sum_of_digits = 0
+            n = num
+            while num > 0:
+                sum_of_digits += num % 10
+                num //= 10
+            if sum_of_digits not in hm:
+                hm[sum_of_digits] = []
+            hm[sum_of_digits].append(n)
+        
+        max_pair = -1
+        for key in hm:
+            if len(hm[key]) > 1:
+                pair = max(hm[key])
+                hm[key].remove(pair)
+                pair += max(hm[key])
+                max_pair = max(max_pair,pair)
+
+        return max_pair
