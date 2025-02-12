@@ -1,0 +1,51 @@
+210. Course Schedule II
+
+
+
+class Solution {
+    
+    List<List<Integer>> adjList = new ArrayList<>();
+    List<Integer> stack = new ArrayList<>();
+    int[] visited = null;
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        visited = new int[numCourses];
+        for(int i=0;i<numCourses;i++){
+            adjList.add(new ArrayList<>());
+        }
+        for(int i=0;i<prerequisites.length;i++){
+            adjList.get(prerequisites[i][1]).add(prerequisites[i][0]);
+        }
+        
+        Set<Integer> rec_stack = new HashSet<>();
+        for(int i=0;i<numCourses;i++){
+            if(visited[i] == 0){
+                if(dfs(i,rec_stack)){
+                    return new int[0];
+                }
+            }
+        }
+        int[] result = new int[stack.size()];
+        for(int i=0;i<stack.size();i++){
+            result[stack.size() - i - 1] = stack.get(i);
+        }
+        return result;
+    }
+
+    public boolean dfs(int i,Set<Integer> rec_stack){
+        visited[i] = 1;
+        rec_stack.add(i);
+        for(int adjnode : adjList.get(i)){
+            if(visited[adjnode] == 0){
+                if(dfs(adjnode,rec_stack)){
+                    return true;
+                }
+            }
+            else if(rec_stack.contains(adjnode)){
+                return true;
+            }
+        }
+        stack.add(i);
+        rec_stack.remove(i);
+        return false;
+    }
+}
