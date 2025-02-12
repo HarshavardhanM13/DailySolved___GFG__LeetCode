@@ -1,0 +1,22 @@
+
+k-th Smallest in BST
+
+
+
+
+
+class Solution:
+    # Return the kth smallest element in the given BST 
+    def kthSmallest(self, root, k): 
+        
+        inorder_array = []
+        
+        def inorder(root):
+            if not root:
+                return 
+            inorder(root.left)
+            inorder_array.append(root.data)
+            inorder(root.right)
+            
+        inorder(root)
+        return inorder_array[k - 1] if len(inorder_array) >=k else -1
