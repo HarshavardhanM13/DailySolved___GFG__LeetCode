@@ -1,0 +1,17 @@
+Pair Sum in BST
+
+
+hm = {}
+        
+        def inorder(root):
+            if not root:
+                return False
+            
+            if root.data in hm:
+                return True
+            
+            hm[target - root.data] = root.data
+            
+            return inorder(root.left) or inorder(root.right)
+        
+        return inorder(root)
