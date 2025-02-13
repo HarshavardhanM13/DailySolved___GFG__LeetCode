@@ -1,0 +1,23 @@
+
+3066. Minimum Operations to Exceed Threshold Value II
+
+
+
+import heapq
+class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:
+        
+        heapq.heapify(nums)
+
+        times = 0
+        if nums[0] >= k:
+            return times
+        while len(nums) >= 2:
+            x = heapq.heappop(nums)
+            y = heapq.heappop(nums)
+            to_add = x * 2 + y
+            heapq.heappush(nums,to_add)
+            times += 1
+            if nums[0] >= k:
+                break
+        return times
