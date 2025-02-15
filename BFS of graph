@@ -1,0 +1,32 @@
+
+BFS of graph
+
+
+
+class Solution {
+    // Function to return Breadth First Traversal of given graph...
+    ArrayList<Integer> al = new ArrayList<>();
+    Set<Integer> visited = new HashSet<>();
+    Queue<Integer> queue = new LinkedList<>();
+    
+    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+            
+            queue.add(0);
+            al.add(0);
+            visited.add(0);
+            
+            while(!queue.isEmpty()){
+                int curr = queue.poll();
+                for(int adjnode : adj.get(curr)){
+                    if(!visited.contains(adjnode)){
+                        visited.add(adjnode);
+                        queue.add(adjnode);
+                        al.add(adjnode);
+                    }
+                }
+            }
+            
+            return al;
+    }
+    
+}
