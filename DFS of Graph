@@ -1,0 +1,27 @@
+DFS of Graph
+
+
+
+
+
+class Solution {
+    // Function to return a list containing the DFS traversal of the graph.
+    ArrayList<Integer> al  = new ArrayList<>();
+    Set<Integer> visited = new HashSet<>();
+    
+    public ArrayList<Integer> dfsOfGraph(ArrayList<ArrayList<Integer>> adj) {
+            dfs(adj,0);
+            return al;
+    }
+    
+    public void dfs(ArrayList<ArrayList<Integer>> adj,int curr){
+        visited.add(curr);
+        al.add(curr);
+        for(int adjnode : adj.get(curr)){
+            if(!visited.contains(adjnode)){
+                dfs(adj,adjnode);
+            }
+        }
+    }
+    
+}
