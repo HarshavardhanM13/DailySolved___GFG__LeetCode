@@ -1,0 +1,31 @@
+
+
+2360. Longest Cycle in a Graph
+
+
+class Solution:
+    def longestCycle(self, edges: List[int]) -> int:
+        
+        stack = [0] * len(edges)
+        visited = set()
+        self.max_len = -1
+        def dfs(curr,curr_len,visited,stack):
+            curr_len += 1
+            visited.add(curr)
+            stack[curr] = curr_len
+            adjnode = edges[curr]
+            if adjnode != -1:
+                if adjnode not in visited:
+                    dfs(adjnode,curr_len,visited,stack)
+                elif adjnode in visited and stack[adjnode] > 0:
+                    curr_len_cycle = stack[curr] - stack[adjnode] + 1
+                    self.max_len = max(self.max_len,curr_len_cycle)
+            stack[curr] = 0
+            
+        
+        for i in range(len(edges)):
+            if i not in visited:
+                max_len = dfs(i,0,visited,stack)
+        #print(visited)
+        #print(stack)
+        return self.max_len
