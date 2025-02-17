@@ -1,0 +1,27 @@
+1079. Letter Tile Possibilities
+
+
+
+
+class Solution {
+    HashMap<Character,Integer> hs = new HashMap<>();
+    public int numTilePossibilities(String tiles) {
+        for(char ch : tiles.toCharArray()){
+            hs.put(ch,hs.getOrDefault(ch,0) + 1);
+        }
+        return backtrack();
+    }
+    
+    int backtrack(){
+        int res = 0;
+        for(char key : hs.keySet()){
+            if(hs.get(key) > 0){
+                res += 1;
+                hs.put(key,hs.get(key) - 1);
+                res += backtrack();
+                hs.put(key,hs.get(key) + 1);
+            }
+        }
+        return res;
+    }
+}
