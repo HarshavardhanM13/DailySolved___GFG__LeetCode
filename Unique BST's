@@ -1,0 +1,23 @@
+Unique BST's
+
+
+
+
+class Solution {
+    // Function to return the total number of possible unique BST.
+    static HashMap<Integer,Integer> dp = new HashMap<>();
+    static int numTrees(int n) {
+        if(dp.containsKey(n)){
+            return dp.get(n);
+        }
+        if(n <= 1){
+            return 1;
+        }
+        int res = 0;
+        for(int i=0;i<n;i++){
+            res = res + (numTrees(i) * numTrees(n - i - 1));
+        }
+        dp.put(n,res);
+        return dp.get(n);
+    }
+}
