@@ -1,0 +1,35 @@
+1971. Find if Path Exists in Graph
+
+
+
+class Solution {
+    int[] visited;
+    ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        visited = new int[n];
+        for(int i=0;i<n;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int i=0;i<edges.length;i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            adj.get(u).add(v);
+            adj.get(v).add(u);
+        }
+        return dfs(source,destination);
+    }
+    public boolean dfs(int source,int destination){
+        if(source == destination){
+            return true;
+        }
+        visited[source] = 1;
+        for(int adjnode : adj.get(source)){
+            if(visited[adjnode] == 0){
+                if(dfs(adjnode,destination)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
