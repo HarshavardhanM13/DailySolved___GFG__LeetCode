@@ -1,0 +1,24 @@
+Nth Catalan Number
+
+
+
+
+class Solution:
+    def findCatalan(self, n):
+        
+        dp = {}
+        
+        def rec(n):
+            if n in dp:
+                return dp[n]
+            if n <= 1:
+                return 1
+            res = 0
+            for i in range(n):
+                res = res + (rec(i) * rec(n - i - 1))
+            
+            dp[n] = res
+            return dp[n]
+        
+        return rec(n)
+        
