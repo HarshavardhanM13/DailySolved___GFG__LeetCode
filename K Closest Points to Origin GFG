@@ -1,0 +1,50 @@
+K Closest Points to Origin GFG
+
+
+
+
+class Pair{
+    int distance = 0;
+    int index = -1;
+    public Pair(int a,int b){
+        this.distance = a;
+        this.index = b;
+    }
+}
+
+
+class Solution {
+    public int[][] kClosest(int[][] points, int k) {
+        Comparator<Pair> cmp = new Comparator<Pair>(){
+            @Override
+        public int compare(Pair p1,Pair p2){
+            if(p1.distance != p2.distance){
+                return Integer.compare(p1.distance,p2.distance);
+            }
+            else{
+                return Integer.compare(p1.index,p2.index);
+            }
+        }
+        };
+        
+        PriorityQueue<Pair> pq = new PriorityQueue<>(cmp);
+        for(int i = 0;i<points.length;i++){
+            int x1 = 0;
+            int y1 = 0;
+            int x2 = points[i][0];
+            int y2 = points[i][1];
+            int distance = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
+            pq.offer(new Pair(distance,i));
+        }
+        int[][] result = new int[k][];
+        for(int i = 0;i<k;i++){
+            Pair p =  pq.poll();
+            result[i] = points[p.index];
+        }
+        return result;
+    }
+}
+
+
+
+
