@@ -1,0 +1,24 @@
+918. Maximum Sum Circular Subarray
+
+
+
+class Solution {
+    public int maxSubarraySumCircular(int[] nums) {
+        int total = 0;
+        int curr_max = 0;
+        int global_max = nums[0];
+        int global_min = nums[0];
+        int curr_min = 0;
+        for(int num : nums){
+            curr_max = Math.max(num,curr_max + num);
+            global_max = Math.max(global_max,curr_max);
+            curr_min = Math.min(num,curr_min + num);
+            global_min = Math.min(global_min,curr_min);
+            total += num;
+        }
+        if(global_min == total){
+            return global_max;
+        }
+        return Math.max(global_max,total - global_min);
+    }
+}
