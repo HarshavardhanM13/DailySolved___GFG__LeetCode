@@ -1,0 +1,25 @@
+1415. The k-th Lexicographical String of All Happy Strings of Length n
+
+
+class Solution:
+    def getHappyString(self, n: int, k: int) -> str:
+        
+        happy_strings = []
+
+        def backtrack(s,prev):
+            if len(s) == n:
+                happy_strings.append(s)
+                return 
+
+            for ch in ['a','b','c']:
+                if ch != prev:
+                    backtrack(s + ch, ch)
+                
+        for i in 'abc':
+            backtrack(i,i)
+        
+        if len(happy_strings) < k:
+            return  ''
+        happy_strings.sort()
+        #print(happy_strings)
+        return happy_strings[k - 1]
