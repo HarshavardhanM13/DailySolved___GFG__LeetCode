@@ -1,0 +1,29 @@
+House Robber II
+
+
+
+
+from typing import List
+
+
+class Solution:
+    def maxValue(self, arr : List[int]) -> int:
+        n = len(arr) - 1
+        dp = {}
+        def backtrack(ind):
+            if ind >= n:
+                return 0
+            if ind in dp:
+                return dp[ind]
+                
+            take = arr[ind] + backtrack(ind + 2)
+            not_take = 0 + backtrack(ind + 1)
+            
+            dp[ind] = max(take,not_take)
+            return dp[ind]
+        
+        r1 = backtrack(0)
+        n = len(arr)
+        dp = {}
+        r2 = backtrack(1)
+        return max(r1,r2)
