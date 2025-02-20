@@ -1,0 +1,19 @@
+1980. Find Unique Binary String
+.
+
+
+
+
+class Solution:
+    def findDifferentBinaryString(self, nums: List[str]) -> str:
+        
+
+        def perm(s,st):
+            if len(s) == len(nums):
+                if s not in nums:
+                    return s
+            if st >= len(nums):
+                return  
+            return perm(s + '0',st + 1) or perm(s + '1' , st + 1)
+            
+        return perm('0',0) or  perm('1',0)
