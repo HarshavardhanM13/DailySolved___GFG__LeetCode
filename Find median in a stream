@@ -1,0 +1,23 @@
+Find median in a stream
+
+
+
+import bisect
+
+class Solution:
+    def getMedian(self, arr):
+        
+        temp = []
+        result = []
+        
+        for i in range(len(arr)):
+            bisect.insort(temp, arr[i])
+            if len(temp) % 2 == 1:
+                result.append(temp[len(temp) // 2])
+            else:
+                ind1 = len(temp) // 2;
+                ind2 = ind1 - 1
+                med = (temp[ind1] + temp[ind2]) / 2
+                result.append(med)
+                
+        return result
