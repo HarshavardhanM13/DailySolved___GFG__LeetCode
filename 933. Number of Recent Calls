@@ -1,0 +1,20 @@
+933. Number of Recent Calls
+
+
+
+class RecentCounter:
+
+    def __init__(self):
+        self.queue = []
+        self.curr = 0
+
+    def ping(self, t: int) -> int:
+        self.queue.append(t)
+        while self.queue[self.curr] < t - 3000:
+            self.curr += 1
+        return len(self.queue) - self.curr
+
+
+# Your RecentCounter object will be instantiated and called as such:
+# obj = RecentCounter()
+# param_1 = obj.ping(t)
