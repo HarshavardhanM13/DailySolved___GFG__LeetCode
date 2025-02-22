@@ -1,0 +1,66 @@
+1028. Recover a Tree From Preorder Traversal
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int pos = 0;
+    int n;
+    public int getNodeVal(String traversal){
+        int num = 0;
+        while(pos < n && (traversal.charAt(pos) >='0' && traversal.charAt(pos) <= '9')){
+            num = num * 10 + (traversal.charAt(pos) - '0');
+            pos++;
+        }
+        return num;
+    }
+    public int getNodeDepth(String traversal){
+        int depth = 0;
+        while(pos < n && (traversal.charAt(pos) == '-')){
+            depth++;
+            pos++;
+        }
+        return depth;
+    }
+    public void buildTree(TreeNode curr,int exp_depth,String traversal){
+        if(pos == n){
+            return ;
+        }
+        int prev_pos = pos;
+        int depth = getNodeDepth(traversal);
+        if(depth < exp_depth){
+            pos = prev_pos;
+            return ;
+        }
+        TreeNode child = new TreeNode(getNodeVal(traversal));
+        if(curr.left == null){
+            curr.left = child;
+        }
+        else{
+            curr.right = child;
+        }
+        buildTree(child,1 + exp_depth,traversal);
+        buildTree(child,1 + exp_depth,traversal);
+    }
+    public TreeNode recoverFromPreorder(String traversal) {
+        n = traversal.length();
+        TreeNode root = new TreeNode(getNodeVal(traversal));
+        buildTree(root,1,traversal);
+        buildTree(root,1,traversal);
+        return root;
+    }
+}
