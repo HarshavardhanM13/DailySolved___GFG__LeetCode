@@ -1,0 +1,47 @@
+
+1372. Longest ZigZag Path in a Binary Tree
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int max_len = 0;
+    public int longestZigZag(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        find(root,'L',0);
+        find(root,'R',0);
+       // longestZigZag(root.left);
+       // longestZigZag(root.right);
+        return max_len;
+    }
+    public void find(TreeNode root,char prev,int depth){
+        if(root == null){
+            return ;
+        }
+        if(prev == 'L'){
+            find(root.right,'R',depth + 1);
+            find(root.left,'L',1);
+        }
+        else{
+            find(root.left,'L',depth + 1);
+            find(root.right,'R',1);
+        }
+        max_len = Math.max(max_len,depth);
+    }
+}
