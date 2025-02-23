@@ -1,0 +1,34 @@
+437. Path Sum III
+
+
+
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def __init__(self):
+        self.paths = 0
+
+    def pathSum(self, root: TreeNode, targetSum: int) -> int:
+        self.inorder(root, targetSum)
+        return self.paths
+
+    def inorder(self, root: TreeNode, target: int):
+        if root is None:
+            return
+        self.findPathSum(root, target)
+        self.inorder(root.left, target)
+        self.inorder(root.right, target)
+
+    def findPathSum(self, root: TreeNode, target: int):
+        if root is None:
+            return
+        if root.val == target:
+            self.paths += 1
+        self.findPathSum(root.left, target - root.val)
+        self.findPathSum(root.right, target - root.val)
