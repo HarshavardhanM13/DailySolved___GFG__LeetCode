@@ -1,0 +1,24 @@
+Next Greater Element
+
+
+
+class Solution {
+    // Function to find the next greater element for each element of the array.
+    public ArrayList<Integer> nextLargerElement(int[] arr) {
+        ArrayList<Integer> al = new ArrayList<>();
+        for(int i=0;i<arr.length-1;i++){
+            int j = i;
+            int nextGreat = -1;
+            while(j < arr.length){
+                if(arr[i] < arr[j]){
+                    nextGreat = arr[j];
+                    break;
+                }
+                j++;
+            }
+            al.add(nextGreat);
+        }
+        al.add(-1);
+        return al;
+    }
+}
