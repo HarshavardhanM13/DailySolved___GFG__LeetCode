@@ -1,0 +1,51 @@
+1161. Maximum Level Sum of a Binary Tree
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int max_level = 1;
+    public int maxLevelSum(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        int curr_level = 0;
+        int max_level_sum = Integer.MIN_VALUE;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            curr_level++;
+            int len = queue.size();
+            int curr_level_sum = 0;
+            for(int i=0;i<len;i++){
+                TreeNode curr = queue.poll();
+                curr_level_sum += curr.val;
+                if(curr.left != null){
+                    queue.offer(curr.left);
+                }
+                if(curr.right != null){
+                    queue.offer(curr.right);
+                }
+            }
+            if(curr_level_sum > max_level_sum){
+                max_level_sum = curr_level_sum;
+                max_level = curr_level; 
+            }
+        }
+        return max_level;
+    }
+}
