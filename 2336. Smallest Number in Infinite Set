@@ -1,0 +1,40 @@
+
+2336. Smallest Number in Infinite Set
+
+
+
+
+class SmallestInfiniteSet {
+    HashSet<Integer> hs;
+    PriorityQueue<Integer> pq;
+    int min_num = 1;
+    public SmallestInfiniteSet() {
+        min_num = 1;
+        hs = new HashSet<>();
+        pq = new PriorityQueue<>();
+    }
+    
+    public int popSmallest() {
+        if(!pq.isEmpty()){
+            int small = pq.poll();
+            hs.remove(small);
+            return small;
+        }
+        min_num++;
+        return min_num - 1;
+    }
+    
+    public void addBack(int num) {
+        if(min_num > num && !hs.contains(num)){
+            hs.add(num);
+            pq.add(num);
+        }
+    }
+}
+
+/**
+ * Your SmallestInfiniteSet object will be instantiated and called as such:
+ * SmallestInfiniteSet obj = new SmallestInfiniteSet();
+ * int param_1 = obj.popSmallest();
+ * obj.addBack(num);
+ */
