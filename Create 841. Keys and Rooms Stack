@@ -1,0 +1,26 @@
+841. Keys and Rooms
+
+
+
+class Solution {
+    
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        HashSet<Integer> visited = new HashSet<>();
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0);
+        while(!stack.isEmpty()){
+            int curr = stack.pop();
+            visited.add(curr);
+            for(int neighbor : rooms.get(curr)){
+                if(!visited.contains(neighbor)){
+                    stack.push(neighbor);
+                }
+            }
+        }
+        if(visited.size() == rooms.size()){
+            return true;
+        }
+        return false;
+    }
+    
+}
