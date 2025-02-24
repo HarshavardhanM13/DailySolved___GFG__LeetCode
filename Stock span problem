@@ -1,0 +1,17 @@
+Stock span problem
+
+
+def calculateSpan(self, arr):
+        
+        
+        stack = []
+        span = []
+        for i in range(len(arr)):
+            while stack and arr[stack[-1]] <= arr[i]:
+                stack.pop()
+            if not stack:
+                span.append(i+1)
+            else:
+                span.append(i - stack[-1])
+            
+        return span
