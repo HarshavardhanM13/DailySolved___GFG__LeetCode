@@ -1,0 +1,23 @@
+841. Keys and Rooms
+
+
+
+class Solution {
+    HashSet<Integer> visited = new HashSet<>();
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        dfs(rooms,0);
+        if(visited.size() == rooms.size()){
+            return true;
+        }
+        return false;
+    }
+
+    public void dfs(List<List<Integer>> rooms,int curr){
+        visited.add(curr);
+        for(int adjnode : rooms.get(curr)){
+            if(!visited.contains(adjnode)){
+                dfs(rooms,adjnode);
+            }
+        }
+    }
+}
