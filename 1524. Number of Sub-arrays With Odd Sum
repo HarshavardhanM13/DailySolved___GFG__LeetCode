@@ -1,0 +1,27 @@
+1524. Number of Sub-arrays With Odd Sum
+
+
+
+class Solution:
+    def numOfSubarrays(self, arr: List[int]) -> int:
+        
+
+        count  = 0
+        oddCount = 0
+        evenCount = 1
+        prefix_sum = 0
+        MOD = 10**9 + 7
+
+        for num in arr:
+            prefix_sum += num
+
+            if prefix_sum % 2 == 0:
+                count += oddCount
+                evenCount += 1
+            else:
+                count += evenCount
+                oddCount += 1
+            
+            count = count % MOD
+        
+        return count
