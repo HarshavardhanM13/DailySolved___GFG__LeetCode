@@ -1,0 +1,66 @@
+
+51. N-Queens
+
+
+
+import java.util.*;
+
+class Solution {
+    List<List<String>> result = new ArrayList<>();
+
+    public List<List<String>> solveNQueens(int n) {
+        List<String> board = new ArrayList<>(Collections.nCopies(n, ".".repeat(n))); 
+        placeQueens(0, board, n);
+        return result;
+    }
+
+    public boolean isSafe(int row, int col, List<String> board, int n) {
+        int d_row = row, d_col = col;
+
+        while (row >= 0 && col >= 0) {
+            if (board.get(row).charAt(col) == 'Q')
+                return false;
+            row--;
+            col--;
+        }
+
+        row = d_row;
+        col = d_col;
+        while (col >= 0) {
+            if (board.get(row).charAt(col) == 'Q')
+                return false;
+            col--;
+        }
+
+        row = d_row;
+        col = d_col;
+        while (row < n && col >= 0) {
+            if (board.get(row).charAt(col) == 'Q')
+                return false;
+            row++;
+            col--;
+        }
+
+        return true;
+    }
+
+    public void placeQueens(int col, List<String> board, int n) {
+        if (col == n) {
+            result.add(new ArrayList<>(board));
+            return;
+        }
+
+        for (int row = 0; row < n; row++) {
+            if (isSafe(row, col, board, n)) {
+                char[] temp = board.get(row).toCharArray();
+                temp[col] = 'Q';
+                board.set(row, new String(temp));
+
+                placeQueens(col + 1, board, n);
+
+                temp[col] = '.';
+                board.set(row, new String(temp));
+            }
+        }
+    }
+}
