@@ -1,0 +1,52 @@
+52. N-Queens II
+
+
+class Solution {
+    char[][] board;
+    int count = 0;
+    public int totalNQueens(int n) {
+        board = new char[n][n];
+        queens(0,n);
+        return count;        
+    }
+    public boolean isSafe(int row,int col,int n){
+        int d_row = row;
+        int d_col = col;
+        while(col>=0 && row>=0){
+            if(board[row][col] == 'Q')
+            return false;
+            row--;
+            col--;
+        }
+        row = d_row;
+        col = d_col;
+        while(col>=0){
+            if(board[row][col] == 'Q')
+            return false;
+            col--;
+        }
+        col = d_col;
+        while(row<n && col>=0){
+            if(board[row][col] == 'Q')
+            return false;
+            col--;
+            row++;
+        }
+        return true;
+    }
+    public void queens(int col,int n){
+        if(col == n){
+            count++;
+            return;
+        }
+        else{
+            for(int row = 0;row<n;row++){
+                if(isSafe(row,col,n)){
+                    board[row][col] = 'Q';
+                    queens(col+1,n);
+                    board[row][col] = '.';
+                }
+            }
+        }
+    }
+}
