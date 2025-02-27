@@ -1,0 +1,39 @@
+
+1466. Reorder Routes to Make All Paths Lead to the City Zero
+
+
+
+class Solution {
+    HashMap<Integer,ArrayList<Integer>> neighbors = new HashMap<>();
+    HashSet<String> edges = new HashSet<>();
+    HashSet<Integer> visited = new HashSet<>();
+    int changes = 0; 
+    public int minReorder(int n, int[][] connections) {
+        for(int[] connection : connections){
+            edges.add(connection[0] +" " +connection[1]);
+        }
+        for(int i = 0;i<n;i++){
+            neighbors.put(i,new ArrayList<>());
+        }
+        for(int[] connection : connections){
+            neighbors.get(connection[0]).add(connection[1]);
+            neighbors.get(connection[1]).add(connection[0]);
+        }
+        visited.add(0);
+        dfs(0);
+        return changes;
+    }
+    public void dfs(int curr_node){
+        for(int adjnode : neighbors.get(curr_node)){
+            if(visited.contains(adjnode)){
+                continue;
+            }
+            String al = adjnode + " " +curr_node;
+            if(!edges.contains(al)){
+                changes += 1;
+            }
+            visited.add(adjnode);
+            dfs(adjnode);
+        }
+    }
+}
