@@ -1,0 +1,20 @@
+502. IPO
+
+
+
+class Solution:
+    def findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:
+        
+        maxProfitHeap = []
+        minCapitalHeap = [(cap,prof) for cap,prof in zip(capital, profits)]
+        heapq.heapify(minCapitalHeap)
+
+        for i in range(k):
+            while minCapitalHeap and minCapitalHeap[0][0] <= w:
+                cap, prof = heapq.heappop(minCapitalHeap)
+                heapq.heappush(maxProfitHeap, -prof)
+            if not maxProfitHeap:
+                break
+            w += -heapq.heappop(maxProfitHeap)
+        
+        return w
