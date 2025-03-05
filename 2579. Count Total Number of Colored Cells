@@ -1,0 +1,20 @@
+2579. Count Total Number of Colored Cells
+
+
+
+class Solution:
+    def coloredCells(self, n: int) -> int:
+        
+        if n == 1:
+            return n
+        
+        colored = 0
+        prev = 1
+        prev_result = 1
+        for i in range(2,n+1):
+            cal = (i-1) * 4
+            cal += prev_result
+            colored = cal
+            prev_result = cal
+            #print(colored,i)
+        return colored
