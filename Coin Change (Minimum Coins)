@@ -1,0 +1,43 @@
+
+Coin Change (Minimum Coins)
+
+
+
+
+
+class Solution {
+    
+    int[][] dp;
+    public int minCoins(int coins[], int sum) {
+        int n = coins.length;
+        dp = new int[n][sum+1];
+        for(int[] row : dp){
+            Arrays.fill(row,-1);
+        }
+        int ans = backtrack(0,sum,n,coins);
+        return ans!=Integer.MAX_VALUE? ans : -1;
+    }
+    
+    int backtrack(int i, int sum,int n,int[] coins){
+        if(sum == 0){
+            return 0;
+        }
+        if(i>=n || sum < 0){
+            return Integer.MAX_VALUE;
+        }
+        if(dp[i][sum] != -1){
+            return dp[i][sum];
+        }
+        int take = Integer.MAX_VALUE;
+        int not_take = 0;
+        if(coins[i]>0){
+            take = backtrack(i,sum - coins[i],n,coins);
+            if(take != Integer.MAX_VALUE){
+                take++;
+            }
+        }
+        not_take = backtrack(i+1,sum,n,coins);
+        dp[i][sum] = Math.min(take,not_take);
+        return dp[i][sum];
+    }
+}
