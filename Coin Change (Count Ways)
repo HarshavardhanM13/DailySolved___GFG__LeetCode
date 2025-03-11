@@ -1,0 +1,31 @@
+
+Coin Change (Count Ways)
+
+
+
+
+class Solution {
+    int[][] dp;
+    public int count(int coins[], int sum) {
+        int n = coins.length;
+        dp = new int[n][sum + 1];
+        for(int[] row:dp)
+        Arrays.fill(row,-1);
+        return backtrack(coins,sum,0,n);
+    }
+    int backtrack(int[] coins,int sum,int i,int n){
+        if(sum == 0){
+            return 1;
+        }
+        if(sum<0 || i>=n){
+            return 0;
+        }
+        if(dp[i][sum] != -1){
+            return dp[i][sum];
+        }
+        int take = backtrack(coins,sum-coins[i],i,n);
+        int not_take = backtrack(coins,sum,i+1,n);
+        dp[i][sum] = take + not_take;
+        return dp[i][sum];
+    }
+}
