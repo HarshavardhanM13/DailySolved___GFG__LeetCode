@@ -1,0 +1,42 @@
+3356. Zero Array Transformation II
+
+
+class Solution {
+    public int minZeroArray(int[] nums, int[][] queries) {
+        int n = nums.length;
+        int left = 0,right = queries.length;
+        if(!canForms(nums,queries,right)){
+            return  -1;
+        }
+        while(left <= right){
+            int middle = (left + right) / 2;
+            if(canForms(nums,queries,middle)){
+                right = middle - 1;
+            }
+            else{
+                left = middle + 1;
+            }
+        }
+        return left;
+    }
+
+    boolean canForms(int[] nums,int[][] queries,int k){
+        int n = nums.length;
+        int  sum =  0;
+        int[] diffArr = new int[n+1];
+
+        for(int i=0;i<k;i++){
+            int left = queries[i][0],right = queries[i][1],v=queries[i][2];
+            diffArr[left] += v;
+            diffArr[right + 1] -= v;
+        }
+
+        for(int i=0;i<n;i++){
+            sum += diffArr[i];
+            if(sum<nums[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
