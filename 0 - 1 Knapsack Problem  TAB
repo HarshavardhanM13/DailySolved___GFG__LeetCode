@@ -1,0 +1,30 @@
+0 - 1 Knapsack Problem TAB
+
+
+
+class Solution {
+    static int knapsack(int W, int val[], int wt[]) {
+        int n = val.length;
+        int[][] dp = new int[n][W + 1];
+
+        for (int w = wt[0]; w <= W; w++) { 
+            if (wt[0] <= W) {
+                dp[0][w] = val[0];
+            }
+        }
+
+        for (int i = 1; i < n; i++) {
+            for (int w = 0; w <= W; w++) {
+                int take = 0;
+                if (wt[i] <= w) {
+                    take = val[i] + dp[i - 1][w - wt[i]];
+                }
+                int not_take = dp[i - 1][w];
+                dp[i][w] = Math.max(take, not_take);
+            }
+        }
+
+        return dp[n - 1][W];
+    }
+}
+
