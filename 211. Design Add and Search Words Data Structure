@@ -1,0 +1,68 @@
+211. Design Add and Search Words Data Structure
+
+
+
+
+class TrieNode{
+    boolean endsHere = false;
+    HashMap<Character,TrieNode> childrens = new HashMap<>();
+    TrieNode(){
+
+    }
+}
+
+
+class WordDictionary {
+
+    TrieNode root;
+    public WordDictionary() {
+        root = new TrieNode();
+    }
+    
+    public void addWord(String word) {
+        TrieNode curr = root;
+
+        for(char ch : word.toCharArray()){
+            if(curr.childrens.getOrDefault(ch,null) == null){
+                curr.childrens.put(ch,new TrieNode());
+            }
+            curr = curr.childrens.get(ch);
+        }
+
+        curr.endsHere  = true;
+    }
+    
+    
+    public boolean search(String word) {
+        return dfs(root,0,word);
+    }
+
+    public boolean dfs(TrieNode root,int ind,String word){
+        if(ind == word.length()){
+            return root.endsHere;
+        }
+        char ch = word.charAt(ind);
+        if(ch == '.'){
+            for(TrieNode childs : root.childrens.values()){
+                if(dfs(childs,ind + 1,word)){
+                    return true;
+                }
+            }
+            return false;
+        }
+        else{
+            TrieNode next = root.childrens.getOrDefault(ch,null);
+            if(next == null){
+                return false;
+            }
+            return dfs(next,ind + 1,word);
+        }
+    }
+}
+
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary obj = new WordDictionary();
+ * obj.addWord(word);
+ * boolean param_2 = obj.search(word);
+ */
