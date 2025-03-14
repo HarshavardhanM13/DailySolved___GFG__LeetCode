@@ -1,0 +1,50 @@
+909. Snakes and Ladders
+
+
+
+class Solution {
+    public int snakesAndLadders(int[][] board) {
+        int n = board.length;
+        int left = 0,right = n - 1;
+        while(left < right){
+            int[] t = board[left];
+            board[left] = board[right];
+            board[right] = t;
+            right--;
+            left++;
+        }
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{1,0});
+        HashSet<Integer> visited = new HashSet<>();
+        while(!q.isEmpty()){
+            int[] curr = q.poll();
+            int Pos = curr[0];
+            int movesTillHere = curr[1];
+            for(int i=1;i<=6;i++){
+                int nextPos = Pos + i;
+                int[] coordinates_of_next = findCoOrdinates(nextPos,n);
+                int row = coordinates_of_next[0];
+                int col = coordinates_of_next[1];
+                if(board[row][col] != -1){
+                    nextPos = board[row][col];
+                }
+                if(nextPos == n * n){
+                    return movesTillHere + 1;
+                }
+                if(!visited.contains(nextPos)){
+                    visited.add(nextPos);
+                    q.add(new int[]{nextPos,movesTillHere + 1});
+                }
+            }
+        }
+        return -1;
+    }
+
+    int[] findCoOrdinates(int position,int n){
+        int r = (position - 1) / n;
+        int c = (position - 1) % n;
+        if(r % 2 == 1)
+            c = (n - 1 - c);
+        return new int[]{r,c};
+    }
+}
