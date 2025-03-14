@@ -1,0 +1,27 @@
+Minimize the Heights II
+
+
+
+class Solution {
+    int getMinDiff(int[] arr, int k) {
+        
+        int n = arr.length; 
+        Arrays.sort(arr);
+        int minHeight = arr[0] + k;
+        int maxHeight = arr[n - 1] - k;
+        int minDiff = arr[n-1] - arr[0];
+        
+        for(int i = 1;i < n; i++){
+            int newMinHeight = Math.min(minHeight,arr[i] - k);
+            int newMaxHeight = Math.max(maxHeight,arr[i - 1] + k);
+            
+            if(newMinHeight < 0) {
+                continue;
+            }
+            
+            minDiff = Math.min(minDiff,newMaxHeight - newMinHeight);
+        }
+        
+        return minDiff;
+    }
+}
