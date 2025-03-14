@@ -1,0 +1,46 @@
+433. Minimum Genetic Mutation
+
+
+
+class Solution {
+    public int minMutation(String startGene, String endGene, String[] bank) {
+        int n = startGene.length();
+        Set<String> Bank = new HashSet<>();
+        for(String s : bank){
+            Bank.add(s);
+        }
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(startGene,0));
+        HashSet<String> visited = new HashSet<>();
+        while(!q.isEmpty()){
+            Pair p = q.poll();
+            String curr = p.s;
+            int level = p.level;
+
+            if(curr.equals(endGene)){
+                return level;
+            } 
+            for(int i=0;i<n;i++){
+                String letters = "ACGT";
+                for(char ch : letters.toCharArray()){
+                    String newGene = curr.substring(0,i) + ch + curr.substring(i + 1,n);
+                    if(Bank.contains(newGene) && !visited.contains(newGene)){
+                        q.add(new Pair(newGene,level + 1));
+                        visited.add(newGene);
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+}
+
+class Pair {
+    String s;
+    int level;
+
+    Pair(String s, int level) {
+        this.s = s;
+        this.level = level;
+    }
+}
