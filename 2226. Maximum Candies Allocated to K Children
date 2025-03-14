@@ -1,0 +1,36 @@
+2226. Maximum Candies Allocated to K Children
+
+
+
+
+class Solution {
+    public int maximumCandies(int[] candies, long k) {
+        long sum = 0;
+        for (int candy : candies) {
+            sum += candy;
+        }
+        if (sum < k) {
+            return 0;
+        }
+
+        int left = 1, right = (int) (sum / k), max_pile = 0;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            long piles = 0;
+
+            for (int candy : candies) {
+                piles += (candy / mid);
+                if (piles >= k) break;
+            }
+
+            if (piles >= k) {
+                max_pile = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return max_pile;
+    }
+}
