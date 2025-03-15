@@ -1,0 +1,41 @@
+2560. House Robber IV
+
+
+
+class Solution {
+    public int minCapability(int[] nums, int k) {
+        int left = Integer.MAX_VALUE;
+        int right = Integer.MIN_VALUE;
+        int result = 0;
+        
+        for (int num : nums) {
+            left = Math.min(left, num);
+            right = Math.max(right, num);
+        }
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (canSelect(nums, mid, k)) {
+                result = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return result;
+    }
+
+    public boolean canSelect(int[] nums, int max, int k) {
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] <= max) {
+                count++;
+                i++;  // Skip the next element
+            }
+            if (count >= k) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
