@@ -1,0 +1,33 @@
+2594. Minimum Time to Repair Cars
+
+
+
+
+class Solution {
+    public long repairCars(int[] ranks, int cars) {
+        long left = 0;
+        long right = (long) ranks[0] * cars * cars;
+        long time = 0;
+
+        while (left <= right) {
+            long mid = (left + right) / 2;
+            long consumed = min_time(mid, ranks);
+            
+            if (consumed >= cars) {
+                time = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return time;
+    }
+
+    public long min_time(long time, int[] ranks) {
+        long count = 0;
+        for (int rank : ranks) {
+            count += (long) Math.sqrt((double) time / rank);
+        }
+        return count;
+    }
+}
