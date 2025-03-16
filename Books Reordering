@@ -1,0 +1,24 @@
+Books Reordering
+
+
+
+
+import heapq
+class Solution:
+    def rearrange(self, pages, shelf):
+        
+        freq = {}
+        
+        for ind,s in enumerate(shelf):
+            if s not in freq:
+                freq[s] = []
+            heapq.heappush(freq.get(s),pages[ind])
+        
+        min_cost = 0
+        for key in freq:
+            while len(freq[key]) > 1:
+                min_cost += freq.get(key)[0]
+                heapq.heappop(freq.get(key))
+        return min_cost;
+        
+        
