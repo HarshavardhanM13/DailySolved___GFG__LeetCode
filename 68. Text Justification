@@ -1,0 +1,51 @@
+68. Text Justification
+
+
+
+class Solution {
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> result = new ArrayList<>();
+
+        int n = words.length;
+        int curr_ind = 0;
+        while(curr_ind < n){
+            int start = curr_ind;
+            int curr_len = 0;
+
+            while(curr_ind < n && (curr_len + (curr_ind - start) + (words[curr_ind].length())) <= maxWidth ){
+                curr_len += words[curr_ind].length();
+                curr_ind++;
+            }
+            int gap = curr_ind - start - 1;
+            String curr_str = "";
+            if(curr_ind == n || gap == 0){
+                for(int i = start; i < curr_ind; i++){
+                    curr_str = curr_str + words[i];
+                    if(i < curr_ind - 1){
+                        curr_str = curr_str + " ";
+                    }
+                }
+                while(curr_str.length () < maxWidth){
+                    curr_str += " ";
+                }
+            }
+            else{
+                int tot_spaces = maxWidth - curr_len;
+                int req_space = tot_spaces / gap;
+                int rem_space = tot_spaces % gap;
+
+                for(int i = start; i<curr_ind; i++){
+                    curr_str = curr_str + words[i];
+                    if(i < curr_ind - 1){
+                        int spaceToadd = req_space + (rem_space -- > 0 ? 1 : 0);
+                        for(int j = 0;j<spaceToadd; j++){
+                            curr_str += " ";
+                        }
+                    }
+                }                
+            }
+            result.add(curr_str);
+        }
+        return result;
+    }
+}
