@@ -1,0 +1,14 @@
+K-th Bit is Set or Not
+
+
+
+
+class CheckBit {
+    static boolean checkKthBit(int n, int k) {
+        int val = 1 << k;
+        if((val & n) > 0){
+            return true;
+        }
+        return false;
+    }
+}
