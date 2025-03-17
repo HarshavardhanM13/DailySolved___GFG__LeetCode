@@ -1,0 +1,42 @@
+Subset Sum Problem
+
+
+
+
+
+class Solution {
+
+    static int[][] dp;
+    static Boolean isSubsetSum(int arr[], int sum) {
+        
+        int n = arr.length;
+        dp = new int[n][sum + 1];
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<=sum;j++){
+                dp[i][j] = -1;
+            }
+        }
+        
+        return backtrack(0,sum,arr);
+        
+    }
+    
+    static boolean backtrack(int ind, int sum, int[] arr){
+        if(sum == 0){
+            return true;
+        }
+        if(ind >= arr.length || sum < 0){
+            return false;
+        }
+        if(dp[ind][sum] != -1){
+            return dp[ind][sum] == 1;
+        }
+        dp[ind][sum] = (backtrack(ind + 1, sum - arr[ind],arr) ||
+        backtrack(ind + 1,sum ,arr))? 1 : 0;
+    
+        return dp[ind][sum] == 1;
+    }
+    
+    
+    
+}
