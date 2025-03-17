@@ -1,0 +1,23 @@
+
+2206. Divide Array Into Equal Pairs
+
+
+
+
+class Solution {
+    public boolean divideArray(int[] nums) {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        int pairs = 0;
+        for(int num : nums){
+            hm.put(num,hm.getOrDefault(num,0)+1);
+            if(hm.get(num) == 2){
+                hm.put(num,0);
+                pairs++;
+            }
+        }
+        if(pairs == (nums.length) / 2){
+            return true;
+        }
+        return false;
+    }
+}
