@@ -1,0 +1,29 @@
+Partition Equal Subset Sum
+
+
+
+
+
+class Solution {
+    static Boolean[][] dp;
+    
+    static boolean equalPartition(int arr[]) {
+        int sum = 0;
+        for (int num : arr) sum += num;
+        if (sum % 2 != 0) return false;
+        
+        int target = sum / 2;
+        dp = new Boolean[arr.length][target + 1];
+        return backtrack(0, 0, target, arr);
+    }
+
+    static boolean backtrack(int ind, int sum1, int target, int[] arr) {
+        if (sum1 == target) return true;
+        if (ind >= arr.length || sum1 > target) return false;
+        if (dp[ind][sum1] != null) return dp[ind][sum1];
+        
+        dp[ind][sum1] = backtrack(ind + 1, sum1 + arr[ind], target, arr) ||
+                        backtrack(ind + 1, sum1, target, arr);
+        return dp[ind][sum1];
+    }
+}
