@@ -1,0 +1,30 @@
+
+2401. Longest Nice Subarray
+
+
+class Solution:
+    def longestNiceSubarray(self, nums: List[int]) -> int:
+        
+        max_len = 0
+        n = len(nums)
+        curr = n - 1
+
+        while curr >= 0:
+            curr_num = nums[curr]
+           # numdigits = len(bin(curr_num)[2:])
+           # neg_num = ~curr_num & (1 << numdigits) - 1
+            count = 1
+            for i in range(curr - 1, -1 ,-1):
+                if (nums[i] & curr_num) == 0:
+                    count += 1
+                    #print(curr_num, neg_num,count)
+                    #numdigits = len(bin(nums[i])[2:])
+                    #neg_num = ~nums[i] & ( 1 << numdigits) - 1
+                    curr_num |= nums[i]
+                else:
+                    break
+                
+            max_len = max(max_len, count);
+            curr -= 1
+        
+        return max_len
