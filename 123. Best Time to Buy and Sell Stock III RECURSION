@@ -1,0 +1,26 @@
+
+123. Best Time to Buy and Sell Stock III RECURSION
+
+
+
+class Solution {
+
+    public int maxProfit(int[] prices) {
+        return backtrack(0,1,2,prices);
+    }
+
+    public int backtrack(int ind,int buy,int rem_trans,int[] prices){
+        if(ind == prices.length || rem_trans == 0){
+            return 0;
+        }
+
+        if(buy == 1){
+            return Math.max(-prices[ind] + backtrack(ind+1,0,rem_trans,prices),
+                    0 + backtrack(ind + 1,1,rem_trans,prices));
+        }
+        else{
+            return Math.max(prices[ind] + backtrack(ind+1,1,rem_trans-1,prices),
+                    0 + backtrack(ind + 1,0, rem_trans,prices));
+        }
+    }
+}
