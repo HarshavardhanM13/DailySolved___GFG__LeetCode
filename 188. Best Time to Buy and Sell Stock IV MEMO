@@ -1,0 +1,37 @@
+188. Best Time to Buy and Sell Stock IV  MEMO
+
+
+
+
+class Solution {
+    int[][][] dp;
+    public int maxProfit(int k, int[] prices) {
+    
+        dp = new int[prices.length][2][k + 1];
+        for(int[][] arr2D : dp) {
+            for (int[] arr1D : arr2D) {
+                Arrays.fill(arr1D, -1);
+            }
+        }
+        return backtrack(0,1,k,prices);
+    }
+
+    public int backtrack(int ind,int buy,int rem_trans,int[] prices){
+        if(ind == prices.length || rem_trans == 0){
+            return 0;
+        }
+        if(dp[ind][buy][rem_trans] != -1){
+            return dp[ind][buy][rem_trans];
+        }
+        if(buy == 1){
+            dp[ind][buy][rem_trans] = Math.max(-prices[ind] + backtrack(ind+1,0,rem_trans,prices),
+                    0 + backtrack(ind + 1,1,rem_trans,prices));
+        }
+        else{
+            dp[ind][buy][rem_trans] = Math.max(prices[ind] + backtrack(ind+1,1,rem_trans-1,prices),
+                    0 + backtrack(ind + 1,0, rem_trans,prices));
+        }
+        return dp[ind][buy][rem_trans];
+    }
+}
+
