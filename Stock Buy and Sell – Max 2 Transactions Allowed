@@ -1,0 +1,32 @@
+Stock Buy and Sell – Max 2 Transactions Allowed
+
+
+
+
+
+class Solution {
+    public static int maxProfit(int[] prices) {
+        int[][][] dp = new int[prices.length + 1][2][2 + 1];
+        // for(int[][] arr2D : dp) {
+        //     for (int[] arr1D : arr2D) {
+        //         Arrays.fill(arr1D, -1);
+        //     }
+        // }
+        int n = prices.length;
+        for(int ind=n-1;ind>=0;ind--){
+            for(int buy = 0;buy<=1;buy++){
+                for(int rem_trans = 1;rem_trans<=2;rem_trans++){
+                    if(buy == 1){
+                        dp[ind][buy][rem_trans] = Math.max(-prices[ind] + dp[ind+1][0][rem_trans],
+                                0 + dp[ind + 1][1][rem_trans]);
+                    }
+                    else{
+                        dp[ind][buy][rem_trans] = Math.max(prices[ind] + dp[ind+1][1][rem_trans-1],
+                                0 + dp[ind + 1][0][rem_trans]);
+                    }
+                }
+            }
+        }
+        return dp[0][1][2];
+    }
+}
