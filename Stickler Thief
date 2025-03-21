@@ -1,0 +1,26 @@
+Stickler Thief
+
+
+
+
+
+class Solution {
+    int[] dp;
+    public int findMaxSum(int arr[]) {
+        dp = new int[arr.length];
+        Arrays.fill(dp,-1);
+        return backtrack(0,arr);
+    }
+    public int backtrack(int ind,int[] arr){
+        if(ind == arr.length){
+            return 0;
+        }
+        if(dp[ind] != -1){
+            return dp[ind];
+        }
+        int take = arr[ind] + backtrack(ind + 1,arr);
+        int not_take = 0 + backtrack(ind + 1,arr);
+        dp[ind] = Math.max(take,not_take);
+        return dp[ind];
+    }
+}
