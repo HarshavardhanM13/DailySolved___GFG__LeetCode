@@ -1,0 +1,28 @@
+Stickler Thief II
+
+
+
+class Solution {
+    int[] dp;
+    int maxValue(int[] arr) {
+        dp = new int[arr.length];
+        Arrays.fill(dp,-1);
+        int from_zero =  backtrack(0,arr,arr.length - 1);
+        Arrays.fill(dp,-1);
+        int from_one = backtrack(1,arr,arr.length);
+        return Math.max(from_zero,from_one);
+    }
+    int backtrack(int ind,int[] arr,int n){
+        if(ind >= n){
+            return 0;
+        }
+        if(dp[ind] != -1){
+            return dp[ind];
+        }
+        int take = arr[ind] + backtrack(ind + 2,arr,n);
+        int not_take = 0 + backtrack(ind + 1,arr,n);
+        
+        dp[ind] = Math.max(take,not_take);
+        return dp[ind];
+    }
+}
