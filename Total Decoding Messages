@@ -1,0 +1,35 @@
+Total Decoding Messages
+
+
+
+
+
+class Solution {
+    int[] dp;
+    public int countWays(String digits) {
+        dp = new int[digits.length() + 1];
+        Arrays.fill(dp,-1);
+        dp[digits.length()] = 1;
+        return backtrack(0,digits);
+    }
+    
+    
+    int backtrack(int ind,String digits){
+        if(dp[ind] != -1){
+            return dp[ind];
+        }
+        if(digits.charAt(ind) == '0'){
+            dp[ind] =  0;
+            return dp[ind];
+        }
+        int res = backtrack(ind + 1,digits);
+        
+        if(ind + 1 < digits.length()){
+            int num = Integer.parseInt(digits.substring(ind , ind + 2));
+            if(num >= 10 && num <= 26)
+            res += backtrack(ind + 2,digits);
+        } 
+        dp[ind] = res;
+        return dp[ind];
+    }
+}
