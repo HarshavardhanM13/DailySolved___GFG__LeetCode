@@ -1,0 +1,27 @@
+Total Decoding Messages RECURSION
+
+
+
+class Solution {
+    public int countWays(String digits) {
+        return backtrack(0,digits);
+    }
+    
+    
+    int backtrack(int ind,String digits){
+        if(ind == digits.length()){
+            return 1;
+        }
+        if(digits.charAt(ind) == '0'){
+            return 0;
+        }
+        int res = backtrack(ind + 1,digits);
+        
+        if(ind + 1 < digits.length()){
+            int num = Integer.parseInt(digits.substring(ind , ind + 2));
+            if(num >= 10 && num <= 26)
+            res += backtrack(ind + 2,digits);
+        } 
+        return res;
+    }
+}
