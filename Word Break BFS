@@ -1,0 +1,42 @@
+
+Word Break BFS
+
+
+
+
+class Solution {
+    public boolean wordBreak(String s, String[] dictionary) {
+        HashSet<String> dictSet = new HashSet<>(Arrays.asList(dictionary));
+        int maxWordLength = 0;
+        
+        for (String word : dictionary) {
+            maxWordLength = Math.max(maxWordLength, word.length());
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[s.length() + 1];
+
+        queue.add(0);
+
+        while (!queue.isEmpty()) {
+            int start = queue.poll();
+
+            if (start == s.length()) {
+                return true;
+            }
+
+            if (!visited[start]) {
+                visited[start] = true;
+
+                for (int end = start + 1; end <= s.length() && end - start <= maxWordLength; end++) {
+                    if (dictSet.contains(s.substring(start, end))) {
+                        queue.add(end);
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+}
+
