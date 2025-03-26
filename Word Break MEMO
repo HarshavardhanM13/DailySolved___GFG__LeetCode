@@ -1,0 +1,33 @@
+Word Break
+
+
+
+
+class Solution {
+    public boolean wordBreak(String s, String[] dictionary) {
+        HashSet<String> dictSet = new HashSet<>(Arrays.asList(dictionary));
+        return backtrack(0, s, dictSet, new HashMap<>());
+    }
+    
+    public boolean backtrack(int ind, String s, HashSet<String> dictionary, Map<Integer, Boolean> memo) {
+        if (ind == s.length()) {
+            return true;
+        }
+        if (memo.containsKey(ind)) {
+            return memo.get(ind);
+        }
+        
+        for (int end = ind + 1; end <= s.length(); end++) {
+            String word = s.substring(ind, end);
+            if (dictionary.contains(word)) {
+                if (backtrack(end, s, dictionary, memo)) {
+                    memo.put(ind, true);
+                    return true;
+                }
+            }
+        }
+        
+        memo.put(ind, false);
+        return false;
+    }
+}
