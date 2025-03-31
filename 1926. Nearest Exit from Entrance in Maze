@@ -1,0 +1,33 @@
+1926. Nearest Exit from Entrance in Maze
+
+
+
+class Solution {
+    int[][] visited;
+    int minSteps = Integer.MAX_VALUE;
+    public int nearestExit(char[][] maze, int[] entrance) {
+        int n = maze.length;
+        int m = maze[0].length;
+        visited = new int[n][m];
+        dfs(maze,entrance[0],entrance[1],0);
+        return minSteps == Integer.MAX_VALUE? -1 : minSteps;
+    }
+
+    public void dfs(char[][] maze, int x, int y,int step){
+        if(x < 0 || y < 0 || x >= maze.length || y >= maze[0].length || maze[x][y] == '+' || visited[x][y] != 0){
+            return ;
+        }
+        if((x == 0 || y == 0 || x == maze.length - 1 || y == maze[0].length -1) && step > 0){
+            minSteps = Math.min(step,minSteps);
+            return;
+        }
+
+        visited[x][y] = 1;
+        dfs(maze,x,y+1,step+1);
+        dfs(maze,x,y-1,step+1);
+        dfs(maze,x-1,y,step+1);
+        dfs(maze,x+1,y,step+1);
+        visited[x][y] = 0;
+        
+    }
+}
