@@ -1,0 +1,54 @@
+994. Rotting Oranges
+
+
+
+
+
+class Solution {
+    public int orangesRotting(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+
+        Queue<int[]> queue = new LinkedList<>();
+        int[][] positions = {{1,0},{-1,0},{0,1},{0,-1}};
+        int states = 0;
+        int freshCount = 0; 
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(grid[i][j] == 2){
+                    queue.offer(new int[]{i, j});
+                } else if(grid[i][j] == 1){
+                    freshCount++;
+                }
+            }
+        }
+
+        if(freshCount == 0) return 0;
+        while(!queue.isEmpty()){
+            int len = queue.size();
+            boolean rotted = false;
+
+            for(int k = 0; k < len; k++){
+                int[] curr = queue.poll();
+                int x = curr[0], y = curr[1];
+
+                for(int[] next : positions){
+                    int nx = x + next[0];
+                    int ny = y + next[1];
+
+                    if(nx < 0 || ny < 0 || nx >= n || ny >= m || grid[nx][ny] != 1){
+                        continue;
+                    }
+                    queue.offer(new int[]{nx, ny});
+                    grid[nx][ny] = 2;
+                    freshCount--;
+                    rotted = true;
+                }
+            }
+
+            if(rotted) states++; 
+        }
+
+        return freshCount == 0 ? states : -1;
+    }
+}
