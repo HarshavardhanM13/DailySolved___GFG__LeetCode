@@ -1,0 +1,41 @@
+1926. Nearest Exit from Entrance in Maze BFS
+
+
+
+class Solution {
+    
+    public int nearestExit(char[][] maze, int[] entrance) {
+        int n = maze.length;
+        int m = maze[0].length;
+        
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{entrance[0],entrance[1],0});
+        maze[entrance[0]][entrance[1]] = '+';
+
+        int[][] positions = {{1,0},{-1,0},{0,1},{0,-1}};
+        int minSteps = Integer.MAX_VALUE;
+        while(!queue.isEmpty()){
+            int[] curr = queue.poll();
+            int x = curr[0];
+            int y = curr[1];
+            int steps = curr[2];
+
+            for(int[] next : positions){
+                int nx = x + next[0] , ny = y + next[1];
+
+                if(nx < 0 || nx >= n || ny < 0 || ny >= m || maze[nx][ny] == '+'){
+                    continue;
+                }
+                if(nx == 0 || nx == n -1 || ny == 0 || ny == m - 1){
+                    return steps + 1;
+                }
+
+                queue.add(new int[]{nx,ny,steps + 1});
+                maze[nx][ny] = '+';
+            }
+        }
+        return -1;
+    }
+
+    
+}
