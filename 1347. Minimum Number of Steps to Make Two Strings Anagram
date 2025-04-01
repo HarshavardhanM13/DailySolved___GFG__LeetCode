@@ -1,0 +1,28 @@
+1347. Minimum Number of Steps to Make Two Strings Anagram
+
+
+
+class Solution {
+    public int minSteps(String s, String t) {
+        
+        HashMap<Character,Integer> hms = new HashMap<>();
+        HashMap<Character,Integer> hmt = new HashMap<>();
+
+        for(char ch : s.toCharArray()){
+            hms.put(ch,hms.getOrDefault(ch,0) + 1);
+        }
+
+        for(char ch : t.toCharArray()){
+            hmt.put(ch,hmt.getOrDefault(ch,0) + 1);
+        }
+
+        int steps = 0;
+        for(char key : hms.keySet()){
+            if(hms.get(key) > hmt.getOrDefault(key,0)){
+                steps += (hms.get(key) - hmt.getOrDefault(key, 0));
+            }
+        }
+
+        return steps;
+    }
+}
