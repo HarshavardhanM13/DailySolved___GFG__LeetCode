@@ -1,0 +1,36 @@
+1031. Maximum Sum of Two Non-Overlapping Subarrays
+
+
+
+class Solution {
+    public int maxSumTwoNoOverlap(int[] nums, int firstLen, int secondLen) {
+        int maxSum = Integer.MIN_VALUE;
+
+        for (int i = 0; i <= nums.length - firstLen; i++) {
+            int sum1 = 0;
+            for (int j = 0; j < firstLen; j++) {
+                sum1 += nums[i + j];
+            }
+
+            int sum2 = findMaxNonOverlapping(nums, secondLen, i, i + firstLen);
+            maxSum = Math.max(maxSum, sum1 + sum2);
+        }
+        return maxSum;
+    }
+
+    private int findMaxNonOverlapping(int[] nums, int secondLen, int start, int end) {
+        int maxSum = 0;
+
+        for (int i = 0; i <= nums.length - secondLen; i++) {
+           
+            if (i + secondLen <= start || i >= end) {
+                int sum2 = 0;
+                for (int j = 0; j < secondLen; j++) {
+                    sum2 += nums[i + j];
+                }
+                maxSum = Math.max(maxSum, sum2);
+            }
+        }
+        return maxSum;
+    }
+}
