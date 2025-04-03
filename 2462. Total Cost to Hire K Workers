@@ -1,0 +1,48 @@
+2462. Total Cost to Hire K Workers
+
+
+
+import heapq
+
+class Solution:
+    def totalCost(self, costs: List[int], k: int, candidates: int) -> int:
+        heap = []
+
+        left = 0
+        right = len(costs) - 1
+        visited = set()
+
+        if 2 * candidates < len(costs):
+            for i in range(candidates):
+                heapq.heappush(heap, (costs[left], left))
+                heapq.heappush(heap, (costs[right], right))
+                visited.add(left)
+                visited.add(right)
+                right -= 1
+                left += 1
+        else:
+            for ind,cost in enumerate(costs):
+                heapq.heappush(heap, (cost, ind))
+                visited.add(ind)
+
+        gain = 0
+        while k > 0:
+            if left <= right:
+                winner = heapq.heappop(heap)
+                gain += winner[0]
+                if winner[1] < left:
+                    if left not in visited:
+                        heapq.heappush(heap, (costs[left], left))
+                        visited.add(left)
+                        left += 1
+                else:
+                    if right not in visited:
+                        heapq.heappush(heap, (costs[right] , right))
+                        visited.add(right)
+                        right -= 1
+            else:
+                gain += heapq.heappop(heap)[0]
+        
+            k -= 1
+        
+        return gain
