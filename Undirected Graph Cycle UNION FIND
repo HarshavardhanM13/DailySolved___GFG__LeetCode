@@ -1,0 +1,12 @@
+Undirected Graph Cycle UNION FIND
+
+
+class Solution:
+	def isCycle(self, V, edges):
+		p = list(range(V))
+        def f(x): 
+            return x if p[x] == x else f(p[x])
+        for u, v in edges:
+            if f(u) == f(v): return True
+            p[f(u)] = f(v)
+        return False
