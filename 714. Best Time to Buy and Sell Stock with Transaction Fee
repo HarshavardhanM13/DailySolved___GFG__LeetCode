@@ -1,0 +1,37 @@
+714. Best Time to Buy and Sell Stock with Transaction Fee
+
+
+
+class Solution {
+    public int maxProfit(int[] prices, int fee) {
+        int n = prices.length;
+        int[][] dp = new int[n + 1][2];
+
+        for(int[] row : dp){
+            Arrays.fill(row, -1);
+        }
+
+        return backtrack(0,1,prices, fee, dp);
+    }
+
+    public int backtrack(int ind,int buy,int[] prices,int fee, int[][] dp){
+        if(ind >= prices.length){
+            return 0;
+        }
+
+        if(dp[ind][buy] != -1){
+            return dp[ind][buy];
+        }
+
+        if(buy == 1){
+            dp[ind][buy] = Math.max(-prices[ind] + backtrack(ind + 1,0,prices,fee,dp), 
+                0 + backtrack(ind + 1, 1, prices,fee,dp));
+        }
+        else{
+            dp[ind][buy] = Math.max( prices[ind] - fee + backtrack(ind + 1,1,prices,fee,dp),
+                0 + backtrack(ind + 1, 0, prices,fee,dp));
+        }
+
+        return dp[ind][buy];
+    }
+}
