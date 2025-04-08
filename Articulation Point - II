@@ -1,0 +1,76 @@
+
+Articulation Point - II
+
+
+
+
+class Solution {
+    
+    static HashSet<Integer> bridges;
+    static List<List<Integer>> adjList;
+    static HashSet<Integer> visited;
+    static int[] insertTime;
+    static int[] lowTime;
+    static int time;
+    
+    static ArrayList<Integer> articulationPoints(int V, int[][] edges) {
+        
+        bridges = new HashSet<>();
+        adjList = new ArrayList<>();
+        visited = new HashSet<>();
+        insertTime = new int[V];
+        lowTime = new int[V];
+        time = 1;
+
+        for (int i = 0; i < V; i++) {
+            adjList.add(new ArrayList<>());
+        }
+
+        for (int[] edge : edges) {
+            adjList.get(edge[0]).add(edge[1]);
+            adjList.get(edge[1]).add(edge[0]);
+        }
+
+        for (int i = 0; i < V; i++) {
+            if (!visited.contains(i)) {
+                dfs(i, -1);
+            }
+        }
+
+        if (bridges.isEmpty()) {
+            return new ArrayList<>(Arrays.asList(-1));
+        }
+
+        ArrayList<Integer> result = new ArrayList<>(bridges);
+      //  Collections.sort(result); 
+        return result;
+    }
+
+    static void dfs(int curr, int parent) {
+        insertTime[curr] = lowTime[curr] = time++;
+        visited.add(curr);
+        int children = 0;
+
+        for (int adj : adjList.get(curr)) {
+            if (adj == parent) continue;
+
+            if (!visited.contains(adj)) {
+                dfs(adj, curr);
+                lowTime[curr] = Math.min(lowTime[curr], lowTime[adj]);
+
+                if (parent != -1 && lowTime[adj] >= insertTime[curr]) {
+                    bridges.add(curr);
+                }
+                children++;
+            } else {
+                lowTime[curr] = Math.min(lowTime[curr], insertTime[adj]);
+            }
+        }
+
+        if (parent == -1 && children > 1) {
+            bridges.add(curr);
+        }
+    }
+
+    
+}
