@@ -1,0 +1,60 @@
+
+
+
+class Solution {
+    
+    int time;
+    List<List<Integer>> adjList;
+    HashSet<Integer> visited;
+    int[] insertTime;
+    int[] lowTime;
+    HashSet<String> bridges;
+    
+    public boolean isBridge(int V, int[][] edges, int c, int d) {
+        time = 1;
+        adjList = new ArrayList<>();
+        visited = new HashSet<>();
+        bridges = new HashSet<>();
+        insertTime = new int[V];
+        lowTime = new int[V];
+        
+        for (int i = 0; i < V; i++) {
+            adjList.add(new ArrayList<>());
+        }
+        for (int[] edge : edges) {
+            adjList.get(edge[0]).add(edge[1]);
+            adjList.get(edge[1]).add(edge[0]);
+        }
+        
+        for (int i = 0; i < V; i++) {
+            if (!visited.contains(i)) {
+                dfs(i, -1);
+            }
+        }
+
+        String edge1 = c + "," + d;
+        String edge2 = d + "," + c;
+
+        return bridges.contains(edge1) || bridges.contains(edge2);
+    }
+    
+    public void dfs(int curr, int parent) {
+        insertTime[curr] = lowTime[curr] = time++;
+        visited.add(curr);
+        
+        for (int adjNode : adjList.get(curr)) {
+            if (adjNode == parent) continue;
+            
+            if (!visited.contains(adjNode)) {
+                dfs(adjNode, curr);
+                lowTime[curr] = Math.min(lowTime[curr], lowTime[adjNode]);
+
+                if (lowTime[adjNode] > insertTime[curr]) {
+                    bridges.add(curr + "," + adjNode);
+                }
+            } else {
+                lowTime[curr] = Math.min(lowTime[curr], insertTime[adjNode]);
+            }
+        }
+    }
+}
