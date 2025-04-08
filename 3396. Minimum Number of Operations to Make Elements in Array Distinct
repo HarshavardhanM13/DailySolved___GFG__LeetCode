@@ -1,0 +1,33 @@
+
+
+3396. Minimum Number of Operations to Make Elements in Array Distinct
+
+class Solution {
+    public int minimumOperations(int[] nums) {
+        HashMap<Integer,Integer> freq = new HashMap<>();
+        int count = nums.length;
+        int operation = 0;
+
+        for(int num :  nums){
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
+        }
+        int curr = 0;
+        while(freq.size() != count){
+            System.out.println(freq);
+            if(count < 3){
+                operation++;
+                break;
+            }
+            for(int i=curr;i< curr + 3;i++){
+                freq.put(nums[i],freq.get(nums[i]) - 1);
+                count -= 1;
+                if(freq.get(nums[i]) == 0){
+                    freq.remove(nums[i]);
+                }
+            }
+            operation++;
+            curr = curr + 3;
+        }
+        return operation;
+    }
+}
