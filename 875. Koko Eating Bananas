@@ -1,0 +1,22 @@
+875. Koko Eating Bananas
+
+
+
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        
+        high = max(piles)
+        low = 1
+        ans = float('inf')
+        while low <= high:
+            mid = (low + high) // 2
+            total_time = 0
+            for pile in piles:
+                total_time += (pile + mid - 1) // mid
+            if total_time <= h:
+                ans = min(mid,ans)
+                high = mid - 1
+            else:
+                low = mid + 1
+            
+        return ans
