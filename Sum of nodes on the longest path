@@ -1,0 +1,33 @@
+Sum of nodes on the longest path
+
+
+
+class Solution {
+    HashMap<Integer,ArrayList<Integer>> hm = new HashMap<>();
+    int maxHeight = 0;
+    public int sumOfLongRootToLeafPath(Node root) {
+        sumLongPath(0,root,0);
+        int res = 0;
+        //System.out.println(hm);
+        for(int val : hm.get(maxHeight)){
+            res = Math.max(val,res);
+        }
+        return res;
+    }
+    
+    public void sumLongPath(int height, Node root,int sum){
+        if(root == null){
+            return;
+        }
+        maxHeight = Math.max(maxHeight,height);
+        if(root.left == null && root.right == null){
+            if(!hm.containsKey(height)){
+                hm.put(height,new ArrayList<>());
+            }
+            hm.get(height).add(sum + root.data);
+            return;
+        }
+        sumLongPath(height + 1,root.left,sum + root.data);
+        sumLongPath(height + 1,root.right,sum + root.data);
+    }
+}
