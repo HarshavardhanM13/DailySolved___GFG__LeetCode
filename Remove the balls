@@ -1,0 +1,25 @@
+Remove the balls
+
+
+
+
+class Solution {
+    public int findLength(int[] color, int[] radius) {
+       
+      Stack<Integer> col = new Stack<>();
+      Stack<Integer> rad = new Stack<>();
+      
+      for(int i = 0;i<radius.length ; i++){
+      
+            if(!col.isEmpty() && col.peek() == color[i]  && radius[i] == rad.peek()){
+                col.pop();
+                rad.pop();
+            }
+            else{
+                col.push(color[i]);
+                rad.push(radius[i]);
+            }
+      }
+      return col.size();
+    }
+}
