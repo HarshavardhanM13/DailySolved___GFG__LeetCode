@@ -1,0 +1,23 @@
+K closest elements
+
+
+
+import heapq
+class Solution:
+    def printKClosest(self, arr, k, x):
+        heap = []
+        
+        for num in arr:
+            if num == x:
+                continue
+            newItem = (-abs(x - num), num)
+            if len(heap) < k:
+                heapq.heappush(heap, newItem)
+            elif newItem > heap[0]:
+                heapq.heapreplace(heap, newItem)
+            
+        result = []
+        while heap:
+            _, num = heapq.heappop(heap)
+            result.append(num)
+        return reversed(result)
