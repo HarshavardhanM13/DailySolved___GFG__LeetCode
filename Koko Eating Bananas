@@ -1,0 +1,48 @@
+
+Koko Eating Bananas
+
+
+
+
+class Solution {
+    public int kokoEat(int[] arr, int k) {
+        
+        
+        int end = 0;
+        for(int num : arr){
+            if(num > end){
+                end = num;
+            }
+        }
+        
+        int start = 1;
+        int result = Integer.MAX_VALUE;
+        while(start <= end){
+            int mid = (start + end) / 2;
+            int ind = 0;
+            int[] temp = Arrays.copyOf(arr, arr.length);
+            int K = k;
+            while(K > 0  && ind < arr.length){
+                
+                if(temp[ind] <= mid){
+                    temp[ind] -= temp[ind];
+                    ind++;
+                }
+                else{
+                    temp[ind] -= mid;
+                }
+                K--;
+                
+            }
+            if(ind == arr.length && temp[ind-1] ==  0){
+                //System.out.println(Arrays.toString(temp) +" "+ K+" "+ind+ " " + mid);
+                result = Math.min(mid, result);
+                end = mid - 1;
+            }
+            else{
+                start = mid + 1;
+            }
+        }
+        return result;
+    }
+}
