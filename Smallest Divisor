@@ -1,0 +1,46 @@
+Smallest Divisor
+
+
+
+
+class Solution {
+    int smallestDivisor(int[] arr, int k) {
+        
+        int min_div = Integer.MAX_VALUE;
+        int max = 0;
+        
+        for(int i = 0;i<arr.length; i++){
+            max = Math.max(arr[i],max);
+        }
+        
+        int left = 1;
+        int right = max;
+        
+        while(left <= right){
+            int mid = (left + right) / 2;
+            int sum = 0;
+            
+            for(int i = 0;i<arr.length;i++){
+                double x = (double)arr[i] / mid;
+                //System.out.println(sum + " " + mid + " " + x);
+                int intpart = (int)x;
+                if(x > 0 && x != intpart){
+                    sum += (intpart + 1);
+                }
+                else{
+                    sum += x;
+                }
+            }
+            
+            if(sum <= k){
+                min_div = Math.min(min_div, mid);
+                right = mid - 1;
+            }
+            else{
+                left = mid  + 1;
+            }
+        }
+        
+        return min_div;
+    }
+}
