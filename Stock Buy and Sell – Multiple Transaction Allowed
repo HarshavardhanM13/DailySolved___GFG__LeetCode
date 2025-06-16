@@ -1,0 +1,32 @@
+
+Stock Buy and Sell – Multiple Transaction Allowed
+
+
+
+// User function Template for Java
+class Solution {
+    public int maximumProfit(int prices[]) {
+        
+        int start = 0;
+        int N = prices.length;
+        int lmax = prices[0];
+        int lmin = prices[0];
+        int result = 0;
+        
+        while(start < N - 1){
+            while(start < N - 1 && prices[start] >= prices[start + 1]){
+                start++;
+            }
+            lmin = prices[start];
+            
+            while(start < N - 1 && prices[start] <= prices[start + 1]){
+                start++;
+            }
+            lmax = prices[start];
+            
+            result += (lmax - lmin);
+        }
+        
+        return result;
+    }
+}
