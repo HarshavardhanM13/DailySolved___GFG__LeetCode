@@ -1,0 +1,26 @@
+459. Repeated Substring Pattern
+
+
+
+class Solution {
+    public boolean repeatedSubstringPattern(String s) {
+        
+        
+        for(int i = 0; i<s.length()/2;i++){
+            String curr_sub_str = s.substring(0,i+1);
+            if(s.length() % curr_sub_str.length() == 0){
+                int j;
+                for(j = 0; j<s.length();j+=curr_sub_str.length()){
+                    if(!s.substring(j,j + curr_sub_str.length()).equals(curr_sub_str)){
+                        break;
+                    }
+                }
+                if(j == s.length()){
+                    return true;
+                }
+            }
+            
+        }
+        return false;
+    }
+}
